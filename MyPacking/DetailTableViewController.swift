@@ -14,6 +14,8 @@ class DetailTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = journey?.name
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,10 +45,10 @@ class DetailTableViewController: UITableViewController {
         return cell
     }
     
+    // Section Title
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return journey?.categories?[section]["cateName"] as! String
+        return journey?.categories?[section]["cateName"] as? String
     }
-    
 
     /*
     // Override to support conditional editing of the table view.
@@ -56,17 +58,22 @@ class DetailTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            var eachCate = self.journey?.categories?[indexPath.section]
+            var items = eachCate?["items"] as! Array<String>
+            items.remove(at: indexPath.row)
+            eachCate?["items"] = items
+            self.journey?.categories?[indexPath.section] = eachCate!
             // Delete the row from the data source
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
+    
 
     /*
     // Override to support rearranging the table view.
