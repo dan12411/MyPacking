@@ -14,8 +14,10 @@ class DetailTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        // 修改標題
         self.title = journey?.name
+        // 增加修改按鈕
+        self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,14 +51,22 @@ class DetailTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return journey?.categories?[section]["cateName"] as? String
     }
+    // Section Color
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header :UITableViewHeaderFooterView = UITableViewHeaderFooterView()
+        
+        header.contentView.backgroundColor = UIColor(red: 254.0/255.0, green: 190.0/255.0, blue: 127.0/255.0, alpha: 1)
+        return header
+    }
 
-    /*
+    // MARK: - UITableViewDelegate
+    
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-    */
+    
 
     
     // Override to support editing the table view.
@@ -71,24 +81,34 @@ class DetailTableViewController: UITableViewController {
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
     
 
-    /*
-    // Override to support rearranging the table view.
+    
+    // 設定 Row 重新排列
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+                var currentCate = self.journey?.categories?[fromIndexPath.section]
+                var items : Array<String> = (currentCate!["items"] as! Array)
+                let tempText = items[to.row]
+                items[to.row] = items[fromIndexPath.row]
+                items[fromIndexPath.row] = tempText
+        
+                // Update item
+                currentCate?["items"] = items
+        
+                // Update catgory data back
+                self.journey?.categories?[fromIndexPath.section] = currentCate!
     }
-    */
+    
 
-    /*
-    // Override to support conditional rearranging of the table view.
+    
+    // 設定哪些item可移動
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
+        
         return true
     }
-    */
+    
 
     /*
     // MARK: - Navigation
