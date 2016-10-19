@@ -114,22 +114,45 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="m8X-Y3-e0r" style="IBUITableViewCellStyleDefault" id="dnp-y0-8yS">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="dnp-y0-8yS" customClass="ItemTableViewCell" customModule="MyPacking" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dnp-y0-8yS" id="g13-4e-aCh">
                                     <frame key="frameInset" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="m8X-Y3-e0r">
-                                            <frame key="frameInset" minX="15" width="345" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g22-YC-FxB">
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="9v5-YO-KXU"/>
+                                                <constraint firstAttribute="width" constant="30" id="Hgl-Wp-1dE"/>
+                                            </constraints>
+                                            <state key="normal" title="Button" image="UnCheck"/>
+                                            <state key="selected" image="Check"/>
+                                            <connections>
+                                                <action selector="checkButton:" destination="dnp-y0-8yS" eventType="touchUpInside" id="XTv-zf-uDL"/>
+                                            </connections>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L1Y-xz-wwb">
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="5El-Jt-uIb"/>
+                                                <constraint firstAttribute="width" constant="205" id="HW7-fO-INf"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="g22-YC-FxB" firstAttribute="centerY" secondItem="g13-4e-aCh" secondAttribute="centerY" id="D89-sM-fQ4"/>
+                                        <constraint firstItem="L1Y-xz-wwb" firstAttribute="centerY" secondItem="g13-4e-aCh" secondAttribute="centerY" id="QIj-49-bAv"/>
+                                        <constraint firstItem="L1Y-xz-wwb" firstAttribute="leading" secondItem="g22-YC-FxB" secondAttribute="trailing" constant="8" id="pNX-Ct-gua"/>
+                                        <constraint firstItem="g22-YC-FxB" firstAttribute="leading" secondItem="g13-4e-aCh" secondAttribute="leading" constant="16" id="yjm-Cd-GgN"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="imageButton" destination="g22-YC-FxB" id="IEJ-HQ-n8M"/>
+                                    <outlet property="itemLabel" destination="L1Y-xz-wwb" id="CZa-MN-fxD"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -141,7 +164,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rX3-FP-E7v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1761" y="28"/>
+            <point key="canvasLocation" x="1760.8" y="27.436281859070466"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="WFP-Ne-aKL">
@@ -165,5 +188,7 @@
     <resources>
         <image name="Bag" width="511" height="512"/>
         <image name="Bag Pressed" width="512" height="512"/>
+        <image name="Check" width="512" height="512"/>
+        <image name="UnCheck" width="469" height="469"/>
     </resources>
 </document>

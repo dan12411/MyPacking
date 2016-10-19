@@ -39,10 +39,10 @@ class DetailTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ItemTableViewCell
         let eachCate = self.journey?.categories?[indexPath.section]
         let itemName = (eachCate?["items"] as! Array<String>)[indexPath.row]
-        cell.textLabel?.text = itemName
+        cell.itemLabel.text = itemName
 
         return cell
     }
