@@ -15,21 +15,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var journey: [Journey] =
         [
             Journey(
-                name: "First Trip",
+                name:"日本行",
                 categories: [
-                    ["cateName" : "Coldplay",
-                     "items" : ["Ghost Stories", "A Head Full of Dreams","Mylo Xyloto"]],
-                    ["cateName" : "Coldplay2",
-                     "items" : ["Ghost Stories2", "A Head Full of Dreams2","Mylo Xyloto2"]]]
+                    ["cateName" : "衣物",
+                     "items" : ["上衣", "外套", "內衣", "襪子"]],
+                    ["cateName" : "盆洗用具",
+                     "items" : ["牙刷", "刮鬍刀","洗面乳"]],
+                    ["cateName" : "電器",
+                     "items" : ["手機", "Macbook","充電器", "充電線"]]]
                     ),
             Journey(
-                name:"Second Trip",
+                name:"冰島自助",
                 categories: [
-                        ["cateName" : "David Guetta",
-                        "items" : ["Lovers on the Sun EP", "Nothing But the Beat Ultimate"]
+                        ["cateName" : "衣物",
+                        "items" : ["上衣", "外套", "內衣", "襪子"]
                         ],
-                        ["cateName" : "David Guetta2",
-                        "items" : ["Lovers on the Sun EP2", "Nothing But the Beat Ultimate2"]
+                        ["cateName" : "盆洗用具",
+                        "items" : ["牙刷", "刮鬍刀","洗面乳"]
                         ]]
                         )
                     ]
