@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -33,11 +34,11 @@
                                         <rect key="frame" x="0.0" y="28" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZUY-re-n2W" id="BRN-55-20S">
-                                            <frame key="frameInset" width="343" height="43"/>
+                                            <frame key="frameInset" width="343" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qss-pS-uOR">
-                                                    <frame key="frameInset" minX="15" width="313" height="43"/>
+                                                    <frame key="frameInset" minX="15" width="313" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                     <color key="textColor" red="0.51743906740000001" green="0.84858781100000003" blue="0.82134479279999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -93,7 +94,7 @@
                                 <rect key="frame" x="0.0" y="28" width="460" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="W1Y-Rv-gSR" id="ZXD-ek-Qzf">
-                                    <frame key="frameInset" width="460" height="43"/>
+                                    <frame key="frameInset" width="460" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -119,39 +120,41 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="Cell" id="dnp-y0-8yS" customClass="ItemTableViewCell" customModule="MyPacking" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="Cell" rowHeight="44" id="dnp-y0-8yS" customClass="ItemTableViewCell" customModule="MyPacking" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dnp-y0-8yS" id="g13-4e-aCh">
-                                    <frame key="frameInset" width="375" height="43"/>
+                                    <frame key="frameInset" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g22-YC-FxB">
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="30" id="9v5-YO-KXU"/>
-                                                <constraint firstAttribute="width" constant="30" id="Hgl-Wp-1dE"/>
-                                            </constraints>
-                                            <state key="normal" title="Button" image="UnCheck"/>
-                                            <state key="selected" image="Check"/>
-                                            <connections>
-                                                <action selector="checkButton:" destination="dnp-y0-8yS" eventType="touchUpInside" id="XTv-zf-uDL"/>
-                                            </connections>
-                                        </button>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L1Y-xz-wwb">
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="21" id="5El-Jt-uIb"/>
-                                                <constraint firstAttribute="width" constant="205" id="HW7-fO-INf"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="K2L-NV-LwJ">
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g22-YC-FxB">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="dQ6-hf-d3D"/>
+                                                        <constraint firstAttribute="width" constant="30" id="kkT-dk-bmk"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Button" image="UnCheck"/>
+                                                    <state key="selected" image="Check"/>
+                                                    <connections>
+                                                        <action selector="checkButton:" destination="dnp-y0-8yS" eventType="touchUpInside" id="XTv-zf-uDL"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L1Y-xz-wwb">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="g22-YC-FxB" firstAttribute="centerY" secondItem="g13-4e-aCh" secondAttribute="centerY" id="D89-sM-fQ4"/>
-                                        <constraint firstItem="L1Y-xz-wwb" firstAttribute="centerY" secondItem="g13-4e-aCh" secondAttribute="centerY" id="QIj-49-bAv"/>
-                                        <constraint firstItem="L1Y-xz-wwb" firstAttribute="leading" secondItem="g22-YC-FxB" secondAttribute="trailing" constant="8" id="pNX-Ct-gua"/>
-                                        <constraint firstItem="g22-YC-FxB" firstAttribute="leading" secondItem="g13-4e-aCh" secondAttribute="leading" constant="16" id="yjm-Cd-GgN"/>
+                                        <constraint firstItem="K2L-NV-LwJ" firstAttribute="leading" secondItem="g13-4e-aCh" secondAttribute="leadingMargin" constant="8" id="4wh-ft-WvZ"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="K2L-NV-LwJ" secondAttribute="bottom" constant="-1.5" id="CJY-91-HSt"/>
+                                        <constraint firstItem="K2L-NV-LwJ" firstAttribute="top" secondItem="g13-4e-aCh" secondAttribute="topMargin" constant="-1" id="IQf-wj-UQu"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="K2L-NV-LwJ" secondAttribute="trailing" constant="8" id="ecb-HJ-NZY"/>
+                                        <constraint firstItem="L1Y-xz-wwb" firstAttribute="centerY" secondItem="g13-4e-aCh" secondAttribute="centerY" id="no3-00-1pv"/>
+                                        <constraint firstItem="g22-YC-FxB" firstAttribute="centerY" secondItem="g13-4e-aCh" secondAttribute="centerY" id="w3u-61-aCh"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>

@@ -22,23 +22,33 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     ["cateName" : "盆洗用具",
                      "items" : ["牙刷", "刮鬍刀","洗面乳"]],
                     ["cateName" : "電器",
-                     "items" : ["手機", "Macbook","充電器", "充電線"]]]
+                     "items" : ["手機", "Macbook","充電器", "充電線", "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww"]]]
                     ),
             Journey(
                 name:"冰島自助",
                 categories: [
                         ["cateName" : "衣物",
-                        "items" : ["上衣", "外套", "內衣", "襪子"]
-                        ],
+                        "items" : ["上衣", "外套", "內衣", "襪子"]],
                         ["cateName" : "盆洗用具",
-                        "items" : ["牙刷", "刮鬍刀","洗面乳"]
-                        ]]
+                        "items" : ["牙刷", "刮鬍刀","洗面乳"]]]
                         )
                     ]
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Set title
+        self.title = "My Packing"
+        
+        // Remove the separators of the empty rows
+        journeyTableView.tableFooterView = UIView(frame: CGRect.zero)
+        
+        // Change the color of the separator
+        journeyTableView.separatorColor = UIColor(red: 240.0/255.0, green: 240.0/255.0, blue: 240.0/255.0, alpha: 0.8)
+        
+        // Remove the title of the back button
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
     // MARK: - TableViewDataSource

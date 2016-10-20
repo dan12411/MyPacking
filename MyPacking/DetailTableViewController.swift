@@ -18,6 +18,11 @@ class DetailTableViewController: UITableViewController {
         self.title = journey?.name
         // 增加修改按鈕
         self.navigationItem.rightBarButtonItem = self.editButtonItem
+        // Remove the separators of the empty rows
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
+        // Cell 自動調整列高(未成功)
+        tableView.estimatedRowHeight = 44.0
+        tableView.rowHeight = UITableViewAutomaticDimension
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,7 +60,8 @@ class DetailTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header :UITableViewHeaderFooterView = UITableViewHeaderFooterView()
         
-        header.contentView.backgroundColor = UIColor(red: 254.0/255.0, green: 190.0/255.0, blue: 127.0/255.0, alpha: 1)
+        header.contentView.backgroundColor = UIColor(red: 135.0/255.0, green: 216.0/255.0, blue: 209.0/255.0, alpha: 1)
+        header.textLabel?.textColor = UIColor.white
         return header
     }
 
