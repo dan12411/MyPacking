@@ -10,7 +10,13 @@ import Foundation
 
 class Journey {
     var name: String?
-    var categories: [[String:Any]]?
+    var categories = [
+        ["cateName": "",
+         "items" :
+            [["itemName" : "",
+             "isPack" : false]]
+        ]
+    ]
     
     init(name: String, categories: [[String:Any]]) {
         
@@ -18,3 +24,4 @@ class Journey {
         self.categories = categories
     }
 }
+

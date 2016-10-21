@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -34,11 +35,11 @@
                                         <rect key="frame" x="0.0" y="28" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZUY-re-n2W" id="BRN-55-20S">
-                                            <frame key="frameInset" width="343" height="43.5"/>
+                                            <frame key="frameInset" width="343" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qss-pS-uOR">
-                                                    <frame key="frameInset" minX="15" width="313" height="43.5"/>
+                                                    <frame key="frameInset" minX="15" width="313" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                     <color key="textColor" red="0.51743906740000001" green="0.84858781100000003" blue="0.82134479279999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -94,7 +95,7 @@
                                 <rect key="frame" x="0.0" y="28" width="460" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="W1Y-Rv-gSR" id="ZXD-ek-Qzf">
-                                    <frame key="frameInset" width="460" height="43.5"/>
+                                    <frame key="frameInset" width="460" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -115,7 +116,7 @@
         <scene sceneID="zfk-Hd-OWV">
             <objects>
                 <tableViewController id="6gF-JQ-B3C" customClass="DetailTableViewController" customModule="MyPacking" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="D3h-lf-6er">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="D3h-lf-6er">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -124,7 +125,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dnp-y0-8yS" id="g13-4e-aCh">
-                                    <frame key="frameInset" width="375" height="43.5"/>
+                                    <frame key="frameInset" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="K2L-NV-LwJ">
@@ -147,18 +148,49 @@
                                                 </label>
                                             </subviews>
                                         </stackView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="AZz-Yf-IAe">
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tMw-g1-a4L">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="RdF-em-qb0"/>
+                                                        <constraint firstAttribute="width" constant="20" id="c55-lG-xEK"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Button" image="Minus"/>
+                                                </button>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XgY-mW-SlH">
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                </textField>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hqk-GT-aOF">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="HDe-XV-f61"/>
+                                                        <constraint firstAttribute="width" constant="20" id="Oii-oM-lNn"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Button" image="Add"/>
+                                                </button>
+                                            </subviews>
+                                        </stackView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="K2L-NV-LwJ" firstAttribute="leading" secondItem="g13-4e-aCh" secondAttribute="leadingMargin" constant="8" id="4wh-ft-WvZ"/>
+                                        <constraint firstItem="AZz-Yf-IAe" firstAttribute="leading" secondItem="K2L-NV-LwJ" secondAttribute="trailing" constant="8" id="B8E-Ip-qvf"/>
+                                        <constraint firstItem="K2L-NV-LwJ" firstAttribute="width" secondItem="AZz-Yf-IAe" secondAttribute="width" multiplier="4:1" id="BAS-HI-sx4"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="K2L-NV-LwJ" secondAttribute="bottom" constant="-1.5" id="CJY-91-HSt"/>
                                         <constraint firstItem="K2L-NV-LwJ" firstAttribute="top" secondItem="g13-4e-aCh" secondAttribute="topMargin" constant="-1" id="IQf-wj-UQu"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="K2L-NV-LwJ" secondAttribute="trailing" constant="8" id="ecb-HJ-NZY"/>
+                                        <constraint firstItem="XgY-mW-SlH" firstAttribute="centerY" secondItem="g13-4e-aCh" secondAttribute="centerY" id="W77-LY-AQw"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="AZz-Yf-IAe" secondAttribute="trailing" constant="8" id="ceD-O5-DbV"/>
+                                        <constraint firstItem="AZz-Yf-IAe" firstAttribute="centerY" secondItem="g13-4e-aCh" secondAttribute="centerY" id="ejH-fr-5OB"/>
                                         <constraint firstItem="L1Y-xz-wwb" firstAttribute="centerY" secondItem="g13-4e-aCh" secondAttribute="centerY" id="no3-00-1pv"/>
+                                        <constraint firstItem="tMw-g1-a4L" firstAttribute="centerY" secondItem="g13-4e-aCh" secondAttribute="centerY" id="qjR-Ws-09s"/>
+                                        <constraint firstItem="Hqk-GT-aOF" firstAttribute="centerY" secondItem="g13-4e-aCh" secondAttribute="centerY" id="tl8-DQ-Eh2"/>
                                         <constraint firstItem="g22-YC-FxB" firstAttribute="centerY" secondItem="g13-4e-aCh" secondAttribute="centerY" id="w3u-61-aCh"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="countStackView" destination="AZz-Yf-IAe" id="J9d-88-tWr"/>
                                     <outlet property="imageButton" destination="g22-YC-FxB" id="IEJ-HQ-n8M"/>
+                                    <outlet property="itemCount" destination="XgY-mW-SlH" id="Mh2-1q-nNk"/>
                                     <outlet property="itemLabel" destination="L1Y-xz-wwb" id="CZa-MN-fxD"/>
                                 </connections>
                             </tableViewCell>
@@ -194,9 +226,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Add" width="512" height="512"/>
         <image name="Bag" width="511" height="512"/>
         <image name="Bag Pressed" width="512" height="512"/>
         <image name="Check" width="512" height="512"/>
-        <image name="UnCheck" width="469" height="469"/>
+        <image name="Minus" width="512" height="512"/>
+        <image name="UnCheck" width="469" height="470"/>
     </resources>
 </document>

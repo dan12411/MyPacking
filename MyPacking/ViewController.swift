@@ -18,21 +18,36 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 name:"日本行",
                 categories: [
                     ["cateName" : "衣物",
-                     "items" : ["上衣", "外套", "內衣", "襪子"]],
+                     "items" : [["itemName":"上衣", "isPack":false],
+                                ["itemName":"上衣", "isPack":false],
+                                ["itemName":"上衣", "isPack":false],
+                                ["itemName":"上衣", "isPack":false]]],
                     ["cateName" : "盆洗用具",
-                     "items" : ["牙刷", "刮鬍刀","洗面乳"]],
+                     "items" : [["itemName":"上衣", "isPack":false],
+                                ["itemName":"上衣", "isPack":false],
+                                ["itemName":"上衣", "isPack":false]]],
                     ["cateName" : "電器",
-                     "items" : ["手機", "Macbook","充電器", "充電線", "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww"]]]
+                     "items" : [["itemName":"上衣", "isPack":false],
+                                ["itemName":"上衣", "isPack":false],
+                                ["itemName":"上衣", "isPack":false],
+                                ["itemName":"上衣", "isPack":false]]]
+                            ]
                     ),
             Journey(
                 name:"冰島自助",
                 categories: [
                         ["cateName" : "衣物",
-                        "items" : ["上衣", "外套", "內衣", "襪子"]],
+                        "items" : [["itemName":"上衣", "isPack":false],
+                                   ["itemName":"上衣", "isPack":false],
+                                   ["itemName":"上衣", "isPack":false],
+                                   ["itemName":"上衣", "isPack":false]]],
                         ["cateName" : "盆洗用具",
-                        "items" : ["牙刷", "刮鬍刀","洗面乳"]]]
-                        )
-                    ]
+                        "items" : [["itemName":"上衣", "isPack":false],
+                                   ["itemName":"上衣", "isPack":false],
+                                   ["itemName":"上衣", "isPack":false]]]
+                            ]
+                    )
+        ]
 
     
     override func viewDidLoad() {

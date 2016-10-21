@@ -10,6 +10,11 @@ import UIKit
 
 class ItemTableViewCell: UITableViewCell {
     
+    // For 動畫，未完成
+    @IBOutlet weak var countStackView: UIStackView!
+    
+    @IBOutlet weak var itemCount: UITextField!
+    
     @IBOutlet weak var itemLabel: UILabel!
     
     @IBOutlet weak var imageButton: UIButton!
@@ -21,7 +26,7 @@ class ItemTableViewCell: UITableViewCell {
             isCheck = true
             let checkImage = UIImage(named: "Check")
             imageButton.setImage(checkImage, for: .normal)
-            itemLabel.textColor = UIColor.gray
+            itemLabel.textColor = UIColor.lightGray
         } else {
             isCheck = false
             let checkImage = UIImage(named: "UnCheck")

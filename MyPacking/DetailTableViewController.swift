@@ -8,12 +8,28 @@
 
 import UIKit
 
+// 點任意處會收鍵盤 - part 1
+extension UITableViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UITableViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
+}
+
 class DetailTableViewController: UITableViewController {
+
 
     var journey: Journey?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // 點任意處會收鍵盤 - part 2
+        self.hideKeyboardWhenTappedAround()
         // 修改標題
         self.title = journey?.name
         // 增加修改按鈕
@@ -33,20 +49,21 @@ class DetailTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         
-        return (journey?.categories!.count)!
+        return (journey?.categories.count)!
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let eachCate = self.journey?.categories?[section]
-        let items: Array = eachCate?["items"] as! Array<String>
+        let eachCate = self.journey?.categories[section]
+        let items: Array = eachCate?["items"] as! Array<Any>
         return items.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ItemTableViewCell
-        let eachCate = self.journey?.categories?[indexPath.section]
-        let itemName = (eachCate?["items"] as! Array<String>)[indexPath.row]
+        let eachCate = (self.journey?.categories[indexPath.section])! as [String:Any]
+        let item = (eachCate["items"] as! Array<Any>)[indexPath.row] as! [String:Any]
+        let itemName = item["itemName"] as! String
         cell.itemLabel.text = itemName
 
         return cell
@@ -54,9 +71,9 @@ class DetailTableViewController: UITableViewController {
     
     // Section Title
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return journey?.categories?[section]["cateName"] as? String
+        return journey?.categories[section]["cateName"] as? String
     }
-    // Section Color
+    // Section Color (字體顏色未變)
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header :UITableViewHeaderFooterView = UITableViewHeaderFooterView()
         
@@ -77,12 +94,13 @@ class DetailTableViewController: UITableViewController {
     
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
         if editingStyle == .delete {
-            var eachCate = self.journey?.categories?[indexPath.section]
-            var items = eachCate?["items"] as! Array<String>
+            var eachCate = self.journey?.categories[indexPath.section]
+            var items = (eachCate?["items"] as! Array<Any>)[indexPath.row] as! [String:Any]
             items.remove(at: indexPath.row)
             eachCate?["items"] = items
-            self.journey?.categories?[indexPath.section] = eachCate!
+            self.journey?.categories[indexPath.section] = eachCate!
             // Delete the row from the data source
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
@@ -94,19 +112,39 @@ class DetailTableViewController: UITableViewController {
     
     // 設定 Row 重新排列
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-                var currentCate = self.journey?.categories?[fromIndexPath.section]
-                var items : Array<String> = (currentCate!["items"] as! Array)
-                let tempText = items[to.row]
-                items[to.row] = items[fromIndexPath.row]
-                items[fromIndexPath.row] = tempText
-        
-                // Update item
-                currentCate?["items"] = items
-        
-                // Update catgory data back
-                self.journey?.categories?[fromIndexPath.section] = currentCate!
+                var currentCate = self.journey?.categories[fromIndexPath.section]
+                var items = (currentCate?["items"] as! Array<Any>)[fromIndexPath.row] as! [String:Any]
+//                let tempText = items[to.row] as! String
+//                items[to.row] = items[fromIndexPath.row]
+//                items[fromIndexPath.row] = tempText
+//        
+//                // Update item
+//                currentCate?["items"] = items
+//        
+//                // Update catgory data back
+//                self.journey?.categories[fromIndexPath.section] = currentCate!
     }
     
+    // 按壓某列，切換打包與否(未成功)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        let eachCate = journey?.categories[indexPath.section]
+        let eachItem = ((eachCate?["items"]) as? [[String:Any]])?[indexPath.row]
+        var isPack = eachItem?["isPack"] as! Bool
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ItemTableViewCell
+        
+        if isPack {
+            isPack = false
+            let checkImage = UIImage(named: "Check")
+            cell.imageButton.setImage(checkImage, for: .normal)
+            cell.itemLabel.textColor = UIColor.lightGray
+        } else {
+            isPack = true
+            let checkImage = UIImage(named: "UnCheck")
+            cell.imageButton.setImage(checkImage, for: .normal)
+            cell.itemLabel.textColor = UIColor.black
+        }
+    }
 
     
     // 設定哪些item可移動
