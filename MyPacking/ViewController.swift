@@ -19,18 +19,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 categories: [
                     ["cateName" : "衣物",
                      "items" : [["itemName":"上衣", "isPack":false],
-                                ["itemName":"上衣", "isPack":false],
-                                ["itemName":"上衣", "isPack":false],
-                                ["itemName":"上衣", "isPack":false]]],
+                                ["itemName":"外套", "isPack":false],
+                                ["itemName":"褲子", "isPack":false],
+                                ["itemName":"襪子", "isPack":false]]],
                     ["cateName" : "盆洗用具",
-                     "items" : [["itemName":"上衣", "isPack":false],
-                                ["itemName":"上衣", "isPack":false],
-                                ["itemName":"上衣", "isPack":false]]],
+                     "items" : [["itemName":"牙膏", "isPack":false],
+                                ["itemName":"牙刷", "isPack":false],
+                                ["itemName":"刮鬍刀", "isPack":false]]],
                     ["cateName" : "電器",
-                     "items" : [["itemName":"上衣", "isPack":false],
-                                ["itemName":"上衣", "isPack":false],
-                                ["itemName":"上衣", "isPack":false],
-                                ["itemName":"上衣", "isPack":false]]]
+                     "items" : [["itemName":"手機", "isPack":false],
+                                ["itemName":"Macbook", "isPack":false],
+                                ["itemName":"充電器", "isPack":false],
+                                ["itemName":"OOOOOOOOOOOOOOOOO", "isPack":false]]]
                             ]
                     ),
             Journey(

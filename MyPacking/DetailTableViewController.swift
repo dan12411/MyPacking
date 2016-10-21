@@ -54,7 +54,7 @@ class DetailTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let eachCate = self.journey?.categories[section]
-        let items: Array = eachCate?["items"] as! Array<Any>
+        let items = eachCate?["items"] as! Array<Any>
         return items.count
     }
 
@@ -97,7 +97,7 @@ class DetailTableViewController: UITableViewController {
         
         if editingStyle == .delete {
             var eachCate = self.journey?.categories[indexPath.section]
-            var items = (eachCate?["items"] as! Array<Any>)[indexPath.row] as! [String:Any]
+            var items = eachCate?["items"] as! Array<Any>
             items.remove(at: indexPath.row)
             eachCate?["items"] = items
             self.journey?.categories[indexPath.section] = eachCate!
@@ -113,16 +113,16 @@ class DetailTableViewController: UITableViewController {
     // 設定 Row 重新排列
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
                 var currentCate = self.journey?.categories[fromIndexPath.section]
-                var items = (currentCate?["items"] as! Array<Any>)[fromIndexPath.row] as! [String:Any]
-//                let tempText = items[to.row] as! String
-//                items[to.row] = items[fromIndexPath.row]
-//                items[fromIndexPath.row] = tempText
-//        
-//                // Update item
-//                currentCate?["items"] = items
-//        
-//                // Update catgory data back
-//                self.journey?.categories[fromIndexPath.section] = currentCate!
+                var items = currentCate?["items"] as! Array<Any>
+                let tempText = items[to.row]
+                items[to.row] = items[fromIndexPath.row]
+                items[fromIndexPath.row] = tempText
+        
+                // Update item
+                currentCate?["items"] = items
+        
+                // Update catgory data back
+                self.journey?.categories[fromIndexPath.section] = currentCate!
     }
     
     // 按壓某列，切換打包與否(未成功)
