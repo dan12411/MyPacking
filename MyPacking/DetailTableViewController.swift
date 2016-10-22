@@ -8,18 +8,6 @@
 
 import UIKit
 
-// 點任意處會收鍵盤 - part 1
-extension UITableViewController {
-    func hideKeyboardWhenTappedAround() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UITableViewController.dismissKeyboard))
-        view.addGestureRecognizer(tap)
-    }
-    
-    func dismissKeyboard() {
-        view.endEditing(true)
-    }
-}
-
 class DetailTableViewController: UITableViewController {
 
 
@@ -28,8 +16,6 @@ class DetailTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // 點任意處會收鍵盤 - part 2
-        self.hideKeyboardWhenTappedAround()
         // 修改標題
         self.title = journey?.name
         // 增加修改按鈕

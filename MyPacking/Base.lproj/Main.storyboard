@@ -135,7 +135,7 @@
                                                         <constraint firstAttribute="width" constant="30" id="kkT-dk-bmk"/>
                                                     </constraints>
                                                     <state key="normal" title="Button" image="UnCheck"/>
-                                                    <state key="selected" image="E23045A6-0F33-45D2-9016-D77B753D62C9"/>
+                                                    <state key="selected" image="1473BB02-129B-4033-9C88-FF373EFCA5B8"/>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L1Y-xz-wwb">
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -197,9 +197,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Bag" width="511" height="512"/>
-        <image name="Bag Pressed" width="512" height="512"/>
-        <image name="E23045A6-0F33-45D2-9016-D77B753D62C9" width="512" height="512">
+        <image name="1473BB02-129B-4033-9C88-FF373EFCA5B8" width="512" height="512">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -17729,6 +17727,8 @@ FAAQChgAEAofABAKJwAQCjQAEAo5ABAKOwAQCj0AEApCABAKSgAQCk0AEApSABAKWgAQCl0AEApvABAK
 cgAQCncAAAAAAAAEAQAAAAAAAAA+AAAAAAAAAAAAAAAAABAKeQ
 </mutableData>
         </image>
+        <image name="Bag" width="511" height="512"/>
+        <image name="Bag Pressed" width="512" height="512"/>
         <image name="UnCheck" width="469" height="470"/>
     </resources>
 </document>
