@@ -36,9 +36,9 @@ class DetailTableViewController: UITableViewController {
         self.navigationItem.rightBarButtonItem = self.editButtonItem
         // Remove the separators of the empty rows
         tableView.tableFooterView = UIView(frame: CGRect.zero)
-        // Cell 自動調整列高(未成功)
-        tableView.estimatedRowHeight = 56.0
-        tableView.rowHeight = UITableViewAutomaticDimension
+//        // Cell 自動調整列高(未成功)
+//        tableView.estimatedRowHeight = 56.0
+//        tableView.rowHeight = UITableViewAutomaticDimension
     }
 
     override func didReceiveMemoryWarning() {
@@ -125,7 +125,7 @@ class DetailTableViewController: UITableViewController {
                 self.journey?.categories[fromIndexPath.section] = currentCate!
     }
     
-    // 按壓某列，切換打包與否(未成功)
+    // 按壓某列，切換打包與否(按壓過久)
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         var eachCate = journey?.categories[indexPath.section]
@@ -134,22 +134,20 @@ class DetailTableViewController: UITableViewController {
         let cell = tableView.cellForRow(at: indexPath) as! ItemTableViewCell
         
         print(eachItem, isPack)
-        
+
         if isPack {
-            let checkImage = UIImage(named: "Check")
+            let checkImage = UIImage(named: "UnCheck")
             cell.imageButton.setImage(checkImage, for: .normal)
-            cell.itemLabel.textColor = UIColor.lightGray
+            cell.itemLabel.textColor = UIColor.black
             var newCate = (eachCate?["items"] as! [[String:Any]])
             isPack = false
             eachItem?["isPack"] = isPack
             newCate[indexPath.row] = eachItem!
             self.journey?.categories[indexPath.section]["items"] = newCate
-            self.journey?.categories[indexPath.section] = eachCate!
-            
         } else {
-            let checkImage = UIImage(named: "UnCheck")
+            let checkImage = UIImage(named: "Check")
             cell.imageButton.setImage(checkImage, for: .normal)
-            cell.itemLabel.textColor = UIColor.black
+            cell.itemLabel.textColor = UIColor.lightGray
             var newCate = (eachCate?["items"] as! [[String:Any]])
             isPack = true
             eachItem?["isPack"] = isPack
