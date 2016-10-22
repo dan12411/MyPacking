@@ -14,7 +14,7 @@ class Journey {
         ["cateName": "",
          "items" :
             [["itemName" : "",
-             "isPack" : false]]
+             "isPack" : Bool()]]
         ]
     ]
     

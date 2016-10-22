@@ -37,7 +37,7 @@ class DetailTableViewController: UITableViewController {
         // Remove the separators of the empty rows
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         // Cell 自動調整列高(未成功)
-        tableView.estimatedRowHeight = 44.0
+        tableView.estimatedRowHeight = 56.0
         tableView.rowHeight = UITableViewAutomaticDimension
     }
 
@@ -128,21 +128,33 @@ class DetailTableViewController: UITableViewController {
     // 按壓某列，切換打包與否(未成功)
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        let eachCate = journey?.categories[indexPath.section]
-        let eachItem = ((eachCate?["items"]) as? [[String:Any]])?[indexPath.row]
+        var eachCate = journey?.categories[indexPath.section]
+        var eachItem = ((eachCate?["items"]) as? [[String:Any]])?[indexPath.row]
         var isPack = eachItem?["isPack"] as! Bool
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ItemTableViewCell
+        let cell = tableView.cellForRow(at: indexPath) as! ItemTableViewCell
+        
+        print(eachItem, isPack)
         
         if isPack {
-            isPack = false
             let checkImage = UIImage(named: "Check")
             cell.imageButton.setImage(checkImage, for: .normal)
             cell.itemLabel.textColor = UIColor.lightGray
+            var newCate = (eachCate?["items"] as! [[String:Any]])
+            isPack = false
+            eachItem?["isPack"] = isPack
+            newCate[indexPath.row] = eachItem!
+            self.journey?.categories[indexPath.section]["items"] = newCate
+            self.journey?.categories[indexPath.section] = eachCate!
+            
         } else {
-            isPack = true
             let checkImage = UIImage(named: "UnCheck")
             cell.imageButton.setImage(checkImage, for: .normal)
             cell.itemLabel.textColor = UIColor.black
+            var newCate = (eachCate?["items"] as! [[String:Any]])
+            isPack = true
+            eachItem?["isPack"] = isPack
+            newCate[indexPath.row] = eachItem!
+            self.journey?.categories[indexPath.section]["items"] = newCate
         }
     }
 

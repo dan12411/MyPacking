@@ -33,7 +33,7 @@ class ItemTableViewCell: UITableViewCell {
             imageButton.setImage(checkImage, for: .normal)
             itemLabel.textColor = UIColor.black
         }
-        
+    
     }
 
     override func awakeFromNib() {
