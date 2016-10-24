@@ -12,46 +12,83 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBOutlet weak var journeyTableView: UITableView!
     
-    var journey: [Journey] =
-        [
-            Journey(
-                name:"日本行",
-                categories: [
-                    ["cateName" : "衣物",
-                     "items" : [["itemName":"上衣", "isPack":false],
-                                ["itemName":"外套", "isPack":false],
-                                ["itemName":"褲子", "isPack":false],
-                                ["itemName":"襪子", "isPack":false]]],
-                    ["cateName" : "盆洗用具",
-                     "items" : [["itemName":"牙膏", "isPack":false],
-                                ["itemName":"牙刷", "isPack":false],
-                                ["itemName":"刮鬍刀", "isPack":false]]],
-                    ["cateName" : "電器",
-                     "items" : [["itemName":"手機", "isPack":false],
-                                ["itemName":"Macbook", "isPack":false],
-                                ["itemName":"充電器", "isPack":false],
-                                ["itemName":"OOOOOOOOOOOOOOOOO", "isPack":false]]]
-                            ]
-                    ),
-            Journey(
-                name:"冰島自助",
-                categories: [
-                        ["cateName" : "衣物",
-                        "items" : [["itemName":"上衣", "isPack":false],
-                                   ["itemName":"上衣", "isPack":false],
-                                   ["itemName":"上衣", "isPack":false],
-                                   ["itemName":"上衣", "isPack":false]]],
-                        ["cateName" : "盆洗用具",
-                        "items" : [["itemName":"上衣", "isPack":false],
-                                   ["itemName":"上衣", "isPack":false],
-                                   ["itemName":"上衣", "isPack":false]]]
-                            ]
-                    )
-        ]
+    var journey = [Journey]()
+    
+//    var journey: [Journey] =
+//        [
+//            Journey(
+//                name:"日本行",
+//                categories: [
+//                    ["cateName" : "衣物",
+//                     "items" : [["itemName":"上衣", "isPack":false],
+//                                ["itemName":"外套", "isPack":false],
+//                                ["itemName":"褲子", "isPack":false],
+//                                ["itemName":"襪子", "isPack":false]]],
+//                    ["cateName" : "盆洗用具",
+//                     "items" : [["itemName":"牙膏", "isPack":false],
+//                                ["itemName":"牙刷", "isPack":false],
+//                                ["itemName":"刮鬍刀", "isPack":false]]],
+//                    ["cateName" : "電器",
+//                     "items" : [["itemName":"手機", "isPack":false],
+//                                ["itemName":"Macbook", "isPack":false],
+//                                ["itemName":"充電器", "isPack":false],
+//                                ["itemName":"OOOOOOOOOOOOOOOOO", "isPack":false]]]
+//                            ]
+//                    ),
+//            Journey(
+//                name:"冰島自助",
+//                categories: [
+//                        ["cateName" : "衣物",
+//                        "items" : [["itemName":"上衣", "isPack":false],
+//                                   ["itemName":"上衣", "isPack":false],
+//                                   ["itemName":"上衣", "isPack":false],
+//                                   ["itemName":"上衣", "isPack":false]]],
+//                        ["cateName" : "盆洗用具",
+//                        "items" : [["itemName":"上衣", "isPack":false],
+//                                   ["itemName":"上衣", "isPack":false],
+//                                   ["itemName":"上衣", "isPack":false]]]
+//                            ]
+//                    )
+//        ]
+    
+    //按下按鈕
+    @IBAction func addNewJorney(_ sender: UIButton) {
+        // 使用我們寫好的函式
+        askInfoWithDefault(nil) {
+            (sucess: Bool, toDo: String?) in
+            
+            // 如果成功有輸入文字的話
+            if sucess == true {
+                if let okToDo = toDo {
+                    
+                    // 把待辦事項存到okToDo 加到toDoArray & reload
+                    var newJourney = Journey(name: "", categories: [])
+                    newJourney.name = okToDo
+                    self.journey.append(newJourney)
+                    self.journeyTableView.reloadData()
+                    
+                    func archiveJourney(journey:[Journey]) -> NSData {
+                    let archivedObject = NSKeyedArchiver.archivedData(withRootObject: journey)
+                    return archivedObject as NSData
+                    }
+                    let archivedObject = archiveJourney(journey: self.journey)
+                    // Save to UserDefaults & 同步
+                    UserDefaults.standard.set(archivedObject, forKey: "Journey")
+                    UserDefaults.standard.synchronize()
+                }
+            }
+        }
+    }
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // 新增旅程並重整
+        if let loadedArray = UserDefaults.standard.array(forKey: "Journey") {
+            journey = loadedArray as! [Journey]
+            journeyTableView.reloadData()
+        }
         
         // Set title
         self.title = "My Packing"
@@ -102,5 +139,51 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
         }
     }
+    
+    // 新增 Journey 功能
+    // 給 completion 取小名
+    typealias AskInfoCompletion = (Bool,String?) -> ()
+    
+    // Alert (*@escaping)
+    func askInfoWithDefault(_ defaultToDo: String?, withCompletionHandler completion: @escaping AskInfoCompletion) {
+        let myAlert = UIAlertController(title: "新增旅程名", message: nil, preferredStyle: .alert)
+        
+        // 新增文字輸入框並設定參數
+        myAlert.addTextField { (textField: UITextField) in
+            textField.placeholder = "請輸入旅程名"   // 設定文字輸入框的placeholder
+            textField.text = defaultToDo  // 如果有預設文字，顯示預設文字
+        }
+        
+        // OK Button
+        let okAction = UIAlertAction(title: "OK", style: .default) {
+            (action) in
+            
+            // 拿到使用者輸入在第一個文字輸入框內的文字(textFields是Array)
+            let inputText = myAlert.textFields?[0].text
+            
+            if inputText != nil && inputText != "" {
+                // 使用者真的有輸入文字
+                completion(true, inputText)
+            } else {
+                // 沒有輸入文字
+                completion(false, nil)
+            }
+        }
+        
+        // Cancel Button
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default) {
+            (action) in
+            completion(false, nil)
+        }
+        
+        // Add Button
+        myAlert.addAction(okAction)
+        myAlert.addAction(cancelAction)
+        
+        
+        // Present
+        present(myAlert, animated: true, completion: nil)
+    }
+
 }
 

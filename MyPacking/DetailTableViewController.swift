@@ -111,7 +111,7 @@ class DetailTableViewController: UITableViewController {
                 self.journey?.categories[fromIndexPath.section] = currentCate!
     }
     
-    // 按壓某列，切換打包與否(按壓過久)
+    // 按壓某列，切換打包與否
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         var eachCate = journey?.categories[indexPath.section]
