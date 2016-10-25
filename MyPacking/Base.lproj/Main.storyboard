@@ -138,7 +138,7 @@
                                                         <constraint firstAttribute="width" constant="30" id="kkT-dk-bmk"/>
                                                     </constraints>
                                                     <state key="normal" title="Button" image="UnCheck"/>
-                                                    <state key="selected" image="7A3ECFC5-388B-474F-BD90-550861B8F9C7"/>
+                                                    <state key="selected" image="D6CB0D4A-8A15-4C68-9936-E5F870E7B3E4"/>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L1Y-xz-wwb">
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -167,6 +167,23 @@
                                     <outlet property="itemCount" destination="crd-0t-8mf" id="qbp-Lb-dD6"/>
                                     <outlet property="itemLabel" destination="L1Y-xz-wwb" id="CZa-MN-fxD"/>
                                 </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="newCell" textLabel="31w-Cp-Eva" rowHeight="56" style="IBUITableViewCellStyleDefault" id="Hno-3z-OQn">
+                                <rect key="frame" x="0.0" y="148" width="375" height="56"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hno-3z-OQn" id="e6W-aY-N3H">
+                                    <frame key="frameInset" width="375" height="55"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="請輸入新項目" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="31w-Cp-Eva">
+                                            <frame key="frameInset" minX="15" width="345" height="55"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -214,7 +231,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="7A3ECFC5-388B-474F-BD90-550861B8F9C7" width="512" height="512">
+        <image name="Bag" width="511" height="512"/>
+        <image name="Bag Pressed" width="512" height="512"/>
+        <image name="D6CB0D4A-8A15-4C68-9936-E5F870E7B3E4" width="512" height="512">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -17744,8 +17763,6 @@ FAAQChgAEAofABAKJwAQCjQAEAo5ABAKOwAQCj0AEApCABAKSgAQCk0AEApSABAKWgAQCl0AEApvABAK
 cgAQCncAAAAAAAAEAQAAAAAAAAA+AAAAAAAAAAAAAAAAABAKeQ
 </mutableData>
         </image>
-        <image name="Bag" width="511" height="512"/>
-        <image name="Bag Pressed" width="512" height="512"/>
         <image name="UnCheck" width="469" height="470"/>
     </resources>
 </document>

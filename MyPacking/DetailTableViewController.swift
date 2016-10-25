@@ -23,17 +23,8 @@ class DetailTableViewController: UITableViewController {
                     
                     // 把待辦事項存到okToDo 加到toDoArray & reload
                     self.journey?.categories.append(["cateName": okToDo,"items":
-                        [["itemName":"請輸入項目", "isPack":false]]])
+                        [["itemName": "修改名稱", "isPack":false]]])
                     self.tableView.reloadData()
-                    
-//                    func archiveJourney(journey: Journey) -> NSData {
-//                        let archivedObject = NSKeyedArchiver.archivedData(withRootObject: journey)
-//                        return archivedObject as NSData
-//                    }
-//                    let archivedObject = archiveJourney(journey: self.journey!)
-                    // Save to UserDefaults & 同步
-//                    UserDefaults.standard.set(self.journey, forKey: "Journey")
-//                    UserDefaults.standard.synchronize()
                 }
             }
         }
@@ -69,19 +60,30 @@ class DetailTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let eachCate = self.journey?.categories[section]
         let items = eachCate?["items"] as! Array<Any>
-        return items.count
+        return (items.count + 1)
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ItemTableViewCell
         
-        let eachCate = (self.journey?.categories[indexPath.section])! as [String:Any]
-        let item = (eachCate["items"] as! Array<Any>)[indexPath.row] as! [String:Any]
-        let itemName = item["itemName"] as! String
-        cell.itemLabel.text = itemName
-
-        return cell
+        let items = self.journey?.categories[indexPath.section]["items"] as! Array<Any>
+        
+        print("cellForRowAt: \(indexPath.row), \(items.count+1)")
+        
+        if indexPath.row < (items.count) {
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ItemTableViewCell
+            
+            let eachCate = (self.journey?.categories[indexPath.section])! as [String:Any]
+            let item = (eachCate["items"] as! Array<Any>)[indexPath.row] as! [String:Any]
+            let itemName = item["itemName"] as! String
+            cell.itemLabel.text = itemName
+            
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "newCell", for: indexPath)
+            return cell   
+        }
     }
     
     // Section Title
@@ -101,8 +103,12 @@ class DetailTableViewController: UITableViewController {
     
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+        let items = self.journey?.categories[indexPath.section]["items"] as! Array<Any>
+        if indexPath.row < (items.count) {
+            return true
+        } else {
+            return false
+        }
     }
     
 
@@ -142,32 +148,58 @@ class DetailTableViewController: UITableViewController {
     
     // 按壓某列，切換打包與否
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-        var eachCate = journey?.categories[indexPath.section]
-        var eachItem = ((eachCate?["items"]) as? [[String:Any]])?[indexPath.row]
-        var isPack = eachItem?["isPack"] as! Bool
-        let cell = tableView.cellForRow(at: indexPath) as! ItemTableViewCell
-
-        if isPack {
-            let checkImage = UIImage(named: "UnCheck")
-            cell.imageButton.setImage(checkImage, for: .normal)
-            cell.itemLabel.textColor = UIColor.black
-            var newCate = (eachCate?["items"] as! [[String:Any]])
-            isPack = false
-            eachItem?["isPack"] = isPack
-            newCate[indexPath.row] = eachItem!
-            self.journey?.categories[indexPath.section]["items"] = newCate
-            print(eachItem, isPack)
+        
+        let items = self.journey?.categories[indexPath.section]["items"] as! Array<Any>
+        if indexPath.row < (items.count) {
+            
+            var eachCate = journey?.categories[indexPath.section]
+            var eachItem = ((eachCate?["items"]) as? [[String:Any]])?[indexPath.row]
+            var isPack = eachItem?["isPack"] as! Bool
+            let cell = tableView.cellForRow(at: indexPath) as! ItemTableViewCell
+            
+            if isPack {
+                let checkImage = UIImage(named: "UnCheck")
+                cell.imageButton.setImage(checkImage, for: .normal)
+                cell.itemLabel.textColor = UIColor.black
+                var newCate = (eachCate?["items"] as! [[String:Any]])
+                isPack = false
+                eachItem?["isPack"] = isPack
+                newCate[indexPath.row] = eachItem!
+                self.journey?.categories[indexPath.section]["items"] = newCate
+                print(eachItem, isPack)
+            } else {
+                let checkImage = UIImage(named: "Check")
+                cell.imageButton.setImage(checkImage, for: .normal)
+                cell.itemLabel.textColor = UIColor.lightGray
+                var newCate = (eachCate?["items"] as! [[String:Any]])
+                isPack = true
+                eachItem?["isPack"] = isPack
+                newCate[indexPath.row] = eachItem!
+                self.journey?.categories[indexPath.section]["items"] = newCate
+                print(eachItem, isPack)
+            }
         } else {
-            let checkImage = UIImage(named: "Check")
-            cell.imageButton.setImage(checkImage, for: .normal)
-            cell.itemLabel.textColor = UIColor.lightGray
-            var newCate = (eachCate?["items"] as! [[String:Any]])
-            isPack = true
-            eachItem?["isPack"] = isPack
-            newCate[indexPath.row] = eachItem!
-            self.journey?.categories[indexPath.section]["items"] = newCate
-            print(eachItem, isPack)
+            // 使用我們寫好的函式
+            askInfoWithDefault(nil) {
+                (sucess: Bool, toDo: String?) in
+                
+                // 如果成功有輸入文字的話
+                if sucess == true {
+                    if let okToDo = toDo {
+                        
+                        // 把待辦事項存到okToDo 加到toDoArray & reload
+                        var items = self.journey?.categories[indexPath.section]["items"] as! Array<Any>
+                        items.append(["itemName": okToDo, "isPack":false])
+                        self.journey?.categories[indexPath.section]["items"] = items
+                        print(items, self.journey?.categories)
+                        self.tableView.reloadData()
+
+                         //Save to UserDefaults & 同步
+//                        UserDefaults.standard.set(self.journey, forKey: "Journey")
+//                        UserDefaults.standard.synchronize()
+                    }
+                }
+            }
         }
     }
 
@@ -241,9 +273,6 @@ class DetailTableViewController: UITableViewController {
                     newCate[indexPath.row] = item
                     self.journey?.categories[indexPath.section]["items"] = newCate
                     self.tableView.reloadData()           // reload
-                    // Save to UserDefaults & 同步
-//                    UserDefaults.standard.set(self.journey, forKey: "Journey")
-//                    UserDefaults.standard.synchronize()
                 }
             }
         }
