@@ -201,6 +201,30 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Present
         present(myAlert, animated: true, completion: nil)
     }
-
+    
+    // 自訂按鈕(copy & delete)
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        // Delete Button (刪除)
+        let deleteAction = UITableViewRowAction(style: .default, title: "Delete", handler: { (action, indexPath) -> Void in
+            
+                    self.journey.remove(at: indexPath.row)
+                    self.journeyTableView.deleteRows(at: [indexPath], with: .fade)
+        })
+        
+        // Copy Button (複製)
+        let copyAction = UITableViewRowAction(style: .default, title: "Copy", handler: { (action, indexPath) -> Void in
+            
+                    self.journey.append(self.journey[indexPath.row])
+                    self.journeyTableView.reloadData()
+        })
+        
+        // Set the button color (課製按鈕顏色)
+        copyAction.backgroundColor = UIColor(red: 135.0/255.0, green: 216.0/255.0, blue: 209.0/255.0, alpha: 1)
+        deleteAction.backgroundColor = UIColor(red: 202.0/255.0, green: 202.0/255.0, blue: 203.0/255.0, alpha: 1.0)
+        
+        // 回傳按鈕
+        return [deleteAction, copyAction]
+    }
 }
 
