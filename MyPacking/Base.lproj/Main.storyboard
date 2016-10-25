@@ -68,11 +68,11 @@
                         <color key="backgroundColor" red="0.51743906740000001" green="0.84858781100000003" blue="0.82134479279999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="dNy-tD-vjX" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="2HG-PW-0vh"/>
-                            <constraint firstItem="psb-x4-vAw" firstAttribute="top" secondItem="dNy-tD-vjX" secondAttribute="bottom" constant="160" id="FeQ-p2-RFI"/>
+                            <constraint firstItem="psb-x4-vAw" firstAttribute="top" secondItem="dNy-tD-vjX" secondAttribute="bottom" constant="100" id="FeQ-p2-RFI"/>
                             <constraint firstAttribute="trailing" secondItem="psb-x4-vAw" secondAttribute="trailing" constant="16" id="Yg2-qo-mdU"/>
-                            <constraint firstItem="dNy-tD-vjX" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="50" id="j7C-ce-sdL"/>
+                            <constraint firstItem="dNy-tD-vjX" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="60" id="j7C-ce-sdL"/>
                             <constraint firstItem="psb-x4-vAw" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="16" id="n17-0Y-ZwD"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="psb-x4-vAw" secondAttribute="bottom" constant="20" id="ptg-rg-RTA"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="psb-x4-vAw" secondAttribute="bottom" constant="40" id="ptg-rg-RTA"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="uqk-qT-40w"/>
@@ -123,11 +123,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="Cell" rowHeight="56" id="dnp-y0-8yS" customClass="ItemTableViewCell" customModule="MyPacking" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="Cell" rowHeight="56" id="dnp-y0-8yS" customClass="ItemTableViewCell" customModule="MyPacking" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="375" height="56"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dnp-y0-8yS" id="g13-4e-aCh">
-                                    <frame key="frameInset" width="375" height="55"/>
+                                    <frame key="frameInset" width="328" height="55"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="K2L-NV-LwJ">
@@ -138,7 +138,7 @@
                                                         <constraint firstAttribute="width" constant="30" id="kkT-dk-bmk"/>
                                                     </constraints>
                                                     <state key="normal" title="Button" image="UnCheck"/>
-                                                    <state key="selected" image="C1DF2E6A-62D0-48F5-BCDA-B2473DDA9E2C"/>
+                                                    <state key="selected" image="4C60A652-5BA7-40AA-AE77-6933CC1E960C"/>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L1Y-xz-wwb">
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -174,6 +174,14 @@
                             <outlet property="delegate" destination="6gF-JQ-B3C" id="JW1-CP-oO1"/>
                         </connections>
                     </tableView>
+                    <toolbarItems>
+                        <barButtonItem systemItem="add" id="vo1-pX-Dwh">
+                            <color key="tintColor" red="0.50072532300000006" green="0.82526928310000003" blue="0.80206896959999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="addCate:" destination="6gF-JQ-B3C" id="uQg-Th-wwI"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" id="CdG-Th-kJc"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rX3-FP-E7v" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -183,13 +191,18 @@
         <!--Navigation Controller-->
         <scene sceneID="WFP-Ne-aKL">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jEv-E0-fCY" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="jEv-E0-fCY" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="JY6-cj-KRs">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="GXO-fO-Yh6">
+                        <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Ovt-SU-bEp"/>
                     </connections>
@@ -200,9 +213,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Bag" width="511" height="512"/>
-        <image name="Bag Pressed" width="512" height="512"/>
-        <image name="C1DF2E6A-62D0-48F5-BCDA-B2473DDA9E2C" width="512" height="512">
+        <image name="4C60A652-5BA7-40AA-AE77-6933CC1E960C" width="512" height="512">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -17732,6 +17743,8 @@ FAAQChgAEAofABAKJwAQCjQAEAo5ABAKOwAQCj0AEApCABAKSgAQCk0AEApSABAKWgAQCl0AEApvABAK
 cgAQCncAAAAAAAAEAQAAAAAAAAA+AAAAAAAAAAAAAAAAABAKeQ
 </mutableData>
         </image>
+        <image name="Bag" width="511" height="512"/>
+        <image name="Bag Pressed" width="512" height="512"/>
         <image name="UnCheck" width="469" height="470"/>
     </resources>
 </document>

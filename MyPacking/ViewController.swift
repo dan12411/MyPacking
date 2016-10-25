@@ -12,44 +12,49 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBOutlet weak var journeyTableView: UITableView!
     
-    var journey = [Journey]()
+//    var journey = [Journey]()
     
-//    var journey: [Journey] =
-//        [
-//            Journey(
-//                name:"日本行",
-//                categories: [
-//                    ["cateName" : "衣物",
-//                     "items" : [["itemName":"上衣", "isPack":false],
-//                                ["itemName":"外套", "isPack":false],
-//                                ["itemName":"褲子", "isPack":false],
-//                                ["itemName":"襪子", "isPack":false]]],
-//                    ["cateName" : "盆洗用具",
-//                     "items" : [["itemName":"牙膏", "isPack":false],
-//                                ["itemName":"牙刷", "isPack":false],
-//                                ["itemName":"刮鬍刀", "isPack":false]]],
-//                    ["cateName" : "電器",
-//                     "items" : [["itemName":"手機", "isPack":false],
-//                                ["itemName":"Macbook", "isPack":false],
-//                                ["itemName":"充電器", "isPack":false],
-//                                ["itemName":"OOOOOOOOOOOOOOOOO", "isPack":false]]]
-//                            ]
-//                    ),
-//            Journey(
-//                name:"冰島自助",
-//                categories: [
-//                        ["cateName" : "衣物",
-//                        "items" : [["itemName":"上衣", "isPack":false],
-//                                   ["itemName":"上衣", "isPack":false],
-//                                   ["itemName":"上衣", "isPack":false],
-//                                   ["itemName":"上衣", "isPack":false]]],
-//                        ["cateName" : "盆洗用具",
-//                        "items" : [["itemName":"上衣", "isPack":false],
-//                                   ["itemName":"上衣", "isPack":false],
-//                                   ["itemName":"上衣", "isPack":false]]]
-//                            ]
-//                    )
-//        ]
+    var journey: [Journey] =
+        [
+            Journey(
+                name:"日本行",
+                categories: [
+                    ["cateName" : "證件 & 隨身用品",
+                    "items" : [["itemName":"護照", "isPack":false],
+                               ["itemName":"身分證", "isPack":false],
+                               ["itemName":"錢包", "isPack":false],
+                               ["itemName":"手錶", "isPack":false]]],
+                    ["cateName" : "衣物",
+                     "items" : [["itemName":"上衣", "isPack":false],
+                                ["itemName":"外套", "isPack":false],
+                                ["itemName":"褲子", "isPack":false],
+                                ["itemName":"襪子", "isPack":false]]],
+                    ["cateName" : "盆洗用具",
+                     "items" : [["itemName":"牙膏", "isPack":false],
+                                ["itemName":"牙刷", "isPack":false],
+                                ["itemName":"刮鬍刀", "isPack":false]]],
+                    ["cateName" : "電器",
+                     "items" : [["itemName":"手機", "isPack":false],
+                                ["itemName":"Macbook", "isPack":false],
+                                ["itemName":"充電器", "isPack":false],
+                                ["itemName":"OOOOOOOOOOOOOOOOOOOOOOO", "isPack":false]]]
+                            ]
+                    ),
+            Journey(
+                name:"冰島自助",
+                categories: [
+                        ["cateName" : "衣物",
+                        "items" : [["itemName":"上衣", "isPack":false],
+                                   ["itemName":"上衣", "isPack":false],
+                                   ["itemName":"上衣", "isPack":false],
+                                   ["itemName":"上衣", "isPack":false]]],
+                        ["cateName" : "盆洗用具",
+                        "items" : [["itemName":"上衣", "isPack":false],
+                                   ["itemName":"上衣", "isPack":false],
+                                   ["itemName":"上衣", "isPack":false]]]
+                            ]
+                    )
+        ]
     
     //按下按鈕
     @IBAction func addNewJorney(_ sender: UIButton) {
@@ -122,6 +127,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.textLabel?.text = journeyName
         
         return cell
+    }
+    
+    // Editing the table view.
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            journey.remove(at: indexPath.row)
+            // Delete the row from the data source
+            journeyTableView.deleteRows(at: [indexPath], with: .fade)
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }
     }
     
     override func didReceiveMemoryWarning() {
