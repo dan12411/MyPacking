@@ -10,15 +10,12 @@ import UIKit
 
 class ItemTableViewCell: UITableViewCell {
     
-    // For 動畫，未完成
-    @IBOutlet weak var countStackView: UIStackView!
-    
     @IBOutlet weak var itemCount: UITextField!
     
     @IBOutlet weak var itemLabel: UILabel!
     
     @IBOutlet weak var imageButton: UIButton!
-    
+
 
     override func awakeFromNib() {
         super.awakeFromNib()

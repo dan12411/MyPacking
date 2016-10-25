@@ -9,7 +9,7 @@
 import UIKit
 
 class DetailTableViewController: UITableViewController {
-
+    
     var journey: Journey?
     
     @IBAction func addCate(_ sender: UIBarButtonItem) {
@@ -54,6 +54,7 @@ class DetailTableViewController: UITableViewController {
         
     }
 
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -74,6 +75,7 @@ class DetailTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ItemTableViewCell
+        
         let eachCate = (self.journey?.categories[indexPath.section])! as [String:Any]
         let item = (eachCate["items"] as! Array<Any>)[indexPath.row] as! [String:Any]
         let itemName = item["itemName"] as! String
@@ -259,4 +261,32 @@ class DetailTableViewController: UITableViewController {
     }
     */
 
+}
+
+// Add Done button for Keyboard
+extension UITextField {
+    
+    open override func awakeFromNib() {
+        super.awakeFromNib()
+        self.addHideinputAccessoryView()
+    }
+    
+    func addHideinputAccessoryView() {
+        
+        let button = UIButton(frame: CGRect(x: 0,y: 0,width: 50,height: 44))
+        button.setTitle("Done", for: .normal)
+        button.setTitleColor(UIColor.blue, for: .normal)
+        button.setTitleColor(UIColor.lightGray, for: .highlighted)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        button.addTarget(self, action: #selector(self.resignFirstResponder), for: .touchUpInside)
+        
+        
+        let barButton = UIBarButtonItem(customView: button)
+        let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+        let toolbar = UIToolbar(frame: CGRect(x:0, y:0, width:self.frame.size.width, height:44))
+        
+        toolbar.items = [space, barButton]
+        self.inputAccessoryView = toolbar
+    }
+    
 }
