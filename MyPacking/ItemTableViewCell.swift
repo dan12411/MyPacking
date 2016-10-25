@@ -16,7 +16,6 @@ class ItemTableViewCell: UITableViewCell {
     
     @IBOutlet weak var imageButton: UIButton!
 
-
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

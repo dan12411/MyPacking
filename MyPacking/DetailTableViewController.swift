@@ -78,8 +78,12 @@ class DetailTableViewController: UITableViewController {
             let item = (eachCate["items"] as! Array<Any>)[indexPath.row] as! [String:Any]
             let itemName = item["itemName"] as! String
             cell.itemLabel.text = itemName
+            // 點選後持續反灰
+            (item["isPack"]) as! Bool ? cell.imageButton.setImage(UIImage(named: "Check"), for: .normal) : cell.imageButton.setImage(UIImage(named: "UnCheck"), for: .normal)
+            cell.itemLabel.textColor = (item["isPack"]) as! Bool ? UIColor.lightGray : UIColor.black
             
             return cell
+            
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "newCell", for: indexPath)
             return cell   
