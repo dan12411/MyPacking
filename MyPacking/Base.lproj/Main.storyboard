@@ -33,15 +33,15 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="psb-x4-vAw">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="qss-pS-uOR" style="IBUITableViewCellStyleDefault" id="ZUY-re-n2W">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="qss-pS-uOR" style="IBUITableViewCellStyleDefault" id="ZUY-re-n2W">
                                         <rect key="frame" x="0.0" y="28" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZUY-re-n2W" id="BRN-55-20S">
-                                            <frame key="frameInset" width="343" height="43"/>
+                                            <frame key="frameInset" width="296" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qss-pS-uOR">
-                                                    <frame key="frameInset" minX="15" width="313" height="43"/>
+                                                    <frame key="frameInset" minX="15" width="281" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                     <color key="textColor" red="0.51743906740000001" green="0.84858781100000003" blue="0.82134479279999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -49,6 +49,7 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <color key="tintColor" red="0.51743906736373901" green="0.84858781099319458" blue="0.82134479284286499" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <segue destination="6gF-JQ-B3C" kind="show" identifier="showDetail" id="v6K-Tg-tpI"/>
                                         </connections>
@@ -138,7 +139,7 @@
                                                         <constraint firstAttribute="width" constant="30" id="kkT-dk-bmk"/>
                                                     </constraints>
                                                     <state key="normal" title="Button" image="UnCheck"/>
-                                                    <state key="selected" image="D6CB0D4A-8A15-4C68-9936-E5F870E7B3E4"/>
+                                                    <state key="selected" image="B92DF1E0-6B30-430A-84AB-903A6CE9AB24"/>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L1Y-xz-wwb">
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -162,6 +163,7 @@
                                         <constraint firstItem="g22-YC-FxB" firstAttribute="centerY" secondItem="g13-4e-aCh" secondAttribute="centerY" id="w3u-61-aCh"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="tintColor" red="0.51743906736373901" green="0.84858781099319458" blue="0.82134479284286499" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="imageButton" destination="g22-YC-FxB" id="IEJ-HQ-n8M"/>
                                     <outlet property="itemCount" destination="crd-0t-8mf" id="qbp-Lb-dD6"/>
@@ -192,19 +194,75 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
-                        <barButtonItem systemItem="add" id="vo1-pX-Dwh">
+                        <barButtonItem image="AddCate" id="vo1-pX-Dwh">
                             <color key="tintColor" red="0.50072532300000006" green="0.82526928310000003" blue="0.80206896959999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="addCate:" destination="6gF-JQ-B3C" id="uQg-Th-wwI"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="Wfp-2i-ihd"/>
+                        <barButtonItem image="Play" id="M9m-3f-yAO">
+                            <color key="tintColor" red="0.50199985504150391" green="0.82489216327667236" blue="0.80588549375534058" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <segue destination="NIh-Lc-tZA" kind="show" identifier="showPlay" id="34y-Ad-6Yl"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="Boc-kG-Lo3"/>
+                        <barButtonItem image="Share" id="dqe-ix-HFY">
+                            <color key="tintColor" red="0.51743906736373901" green="0.84858781099319458" blue="0.82134479284286499" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="CdG-Th-kJc"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rX3-FP-E7v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1760.8" y="27.436281859070466"/>
+        </scene>
+        <!--Detail Collection View Controller-->
+        <scene sceneID="opi-WI-ADY">
+            <objects>
+                <collectionViewController id="NIh-Lc-tZA" customClass="DetailCollectionViewController" customModule="MyPacking" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Ejg-SE-IKa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="MX1-5I-rvP">
+                            <size key="itemSize" width="300" height="300"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="4lK-um-RsN" customClass="ItemCollectionViewCell" customModule="MyPacking" customModuleProvider="target">
+                                <rect key="frame" x="38" y="0.0" width="300" height="300"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Circle" translatesAutoresizingMaskIntoConstraints="NO" id="kk6-YB-P9s"/>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="kk6-YB-P9s" firstAttribute="leading" secondItem="4lK-um-RsN" secondAttribute="leading" id="Jav-cl-zbQ"/>
+                                    <constraint firstAttribute="trailing" secondItem="kk6-YB-P9s" secondAttribute="trailing" id="bWl-11-u5r"/>
+                                    <constraint firstAttribute="bottom" secondItem="kk6-YB-P9s" secondAttribute="bottom" id="exn-dY-PyH"/>
+                                    <constraint firstItem="kk6-YB-P9s" firstAttribute="top" secondItem="4lK-um-RsN" secondAttribute="top" id="vYz-Yk-WVQ"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="myImage" destination="kk6-YB-P9s" id="r0k-bs-N4C"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="NIh-Lc-tZA" id="8Ni-zI-ezg"/>
+                            <outlet property="delegate" destination="NIh-Lc-tZA" id="jNa-yZ-wZU"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CYf-D0-rKy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2477.5999999999999" y="27.436281859070466"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="WFP-Ne-aKL">
@@ -231,9 +289,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Bag" width="511" height="512"/>
-        <image name="Bag Pressed" width="512" height="512"/>
-        <image name="D6CB0D4A-8A15-4C68-9936-E5F870E7B3E4" width="512" height="512">
+        <image name="AddCate" width="48" height="48"/>
+        <image name="B92DF1E0-6B30-430A-84AB-903A6CE9AB24" width="512" height="512">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -17763,6 +17820,11 @@ FAAQChgAEAofABAKJwAQCjQAEAo5ABAKOwAQCj0AEApCABAKSgAQCk0AEApSABAKWgAQCl0AEApvABAK
 cgAQCncAAAAAAAAEAQAAAAAAAAA+AAAAAAAAAAAAAAAAABAKeQ
 </mutableData>
         </image>
+        <image name="Bag" width="511" height="512"/>
+        <image name="Bag Pressed" width="512" height="512"/>
+        <image name="Circle" width="48" height="48"/>
+        <image name="Play" width="48" height="48"/>
+        <image name="Share" width="48" height="48"/>
         <image name="UnCheck" width="469" height="470"/>
     </resources>
 </document>

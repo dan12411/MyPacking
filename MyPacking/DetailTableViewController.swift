@@ -220,7 +220,7 @@ class DetailTableViewController: UITableViewController {
     
     // Alert (*@escaping)
     func askInfoWithDefault(_ defaultToDo: String?, withCompletionHandler completion: @escaping AskInfoCompletion) {
-        let myAlert = UIAlertController(title: "新增項目", message: nil, preferredStyle: .alert)
+        let myAlert = UIAlertController(title: "項目調整", message: nil, preferredStyle: .alert)
         
         // 新增文字輸入框並設定參數
         myAlert.addTextField { (textField: UITextField) in
@@ -276,7 +276,7 @@ class DetailTableViewController: UITableViewController {
                     item["itemName"] = itemName
                     newCate[indexPath.row] = item
                     self.journey?.categories[indexPath.section]["items"] = newCate
-                    self.tableView.reloadData()           // reload
+                    self.tableView.reloadData()
                 }
             }
         }
@@ -284,15 +284,18 @@ class DetailTableViewController: UITableViewController {
 
     
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "showPlay" {
+            if let dvc = segue.destination as? DetailCollectionViewController {
+                dvc.journey = self.journey
+            }
+        }
     }
-    */
+    
 
 }
 
