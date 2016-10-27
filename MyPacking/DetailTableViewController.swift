@@ -12,6 +12,15 @@ class DetailTableViewController: UITableViewController {
     
     var journey: Journey?
     
+    @IBAction func socialShare(_ sender: UIBarButtonItem) {
+        
+        if let name = journey?.name {
+            let defaultText = "請跟我要" + name + "的旅程，需要打包的東西！"
+            let activityController = UIActivityViewController(activityItems: [defaultText], applicationActivities: nil)
+            self.present(activityController, animated:true, completion: nil)
+        }
+    }
+    
     @IBAction func addCate(_ sender: UIBarButtonItem) {
         // 使用我們寫好的函式
         askInfoWithDefault(nil) {
@@ -170,7 +179,7 @@ class DetailTableViewController: UITableViewController {
                 eachItem?["isPack"] = isPack
                 newCate[indexPath.row] = eachItem!
                 self.journey?.categories[indexPath.section]["items"] = newCate
-                print(eachItem, isPack)
+//                print(eachItem, isPack)
             } else {
                 let checkImage = UIImage(named: "Check")
                 cell.imageButton.setImage(checkImage, for: .normal)
@@ -180,7 +189,7 @@ class DetailTableViewController: UITableViewController {
                 eachItem?["isPack"] = isPack
                 newCate[indexPath.row] = eachItem!
                 self.journey?.categories[indexPath.section]["items"] = newCate
-                print(eachItem, isPack)
+//                print(eachItem, isPack)
             }
         } else {
             // 使用我們寫好的函式
@@ -195,7 +204,7 @@ class DetailTableViewController: UITableViewController {
                         var items = self.journey?.categories[indexPath.section]["items"] as! Array<Any>
                         items.append(["itemName": okToDo, "isPack":false])
                         self.journey?.categories[indexPath.section]["items"] = items
-                        print(items, self.journey?.categories)
+//                        print(items, self.journey?.categories)
                         self.tableView.reloadData()
 
                          //Save to UserDefaults & 同步

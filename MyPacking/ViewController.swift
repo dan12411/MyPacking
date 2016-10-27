@@ -17,7 +17,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var journey: [Journey] =
         [
             Journey(
-                name:"日本行",
+                name:"日本行(預設)",
                 categories: [
                     ["cateName" : "證件 & 隨身用品",
                     "items" : [["itemName":"護照", "isPack":false],
@@ -41,22 +41,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                             ]
                     ),
             Journey(
-                name:"冰島自助",
+                name:"冰島自助(預設)",
                 categories: [
                         ["cateName" : "衣物",
                         "items" : [["itemName":"上衣", "isPack":false],
-                                   ["itemName":"上衣", "isPack":false],
-                                   ["itemName":"上衣", "isPack":false],
-                                   ["itemName":"上衣", "isPack":false]]],
+                                   ["itemName":"外套", "isPack":false],
+                                   ["itemName":"褲子", "isPack":false],
+                                   ["itemName":"襪子", "isPack":false]]],
                         ["cateName" : "盆洗用具",
-                        "items" : [["itemName":"上衣", "isPack":false],
-                                   ["itemName":"上衣", "isPack":false],
-                                   ["itemName":"上衣", "isPack":false]]]
+                        "items" : [["itemName":"牙膏", "isPack":false],
+                                   ["itemName":"牙刷", "isPack":false],
+                                   ["itemName":"刮鬍刀", "isPack":false]]]
                             ]
                     )
         ]
     
-    //按下按鈕
+    //按下按鈕，新增旅程
     @IBAction func addNewJorney(_ sender: UIButton) {
         // 使用我們寫好的函式
         askInfoWithDefault(nil) {
@@ -73,8 +73,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     self.journeyTableView.reloadData()
                     
                     func archiveJourney(journey:[Journey]) -> NSData {
-                    let archivedObject = NSKeyedArchiver.archivedData(withRootObject: journey)
-                    return archivedObject as NSData
+                        let archivedObject = NSKeyedArchiver.archivedData(withRootObject: journey)
+                        return archivedObject as NSData
                     }
                     let archivedObject = archiveJourney(journey: self.journey)
                     // Save to UserDefaults & 同步
@@ -90,8 +90,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         
         // 新增旅程並重整
-        if let loadedArray = UserDefaults.standard.array(forKey: "Journey") {
-            journey = loadedArray as! [Journey]
+        if let archivedObject = UserDefaults.standard.object(forKey: "Journey") {
+            if let unarchivedJourney = NSKeyedUnarchiver.unarchiveObject(with: archivedObject as! Data) as? [Journey] {
+                self.journey = unarchivedJourney
+                self.journeyTableView.reloadData()
+                print("unarchivedJourney: ===============\(unarchivedJourney)==================")
+            } else {
+                print("Failed to unarchive journey")
+            }
             journeyTableView.reloadData()
         }
         
@@ -106,6 +112,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         // Remove the title of the back button
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        
     }
     
     // MARK: - TableViewDataSource
@@ -129,6 +140,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return cell
     }
     
+    // MARK:- TableViewDelegate
     // Editing the table view.
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
@@ -141,9 +153,71 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    // 按下 i 之後要修改 (未完成!!!)
+    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        // 找到按下的文字
+        var journeyName = journey[indexPath.row].name as String!
+        // 用該列文字呼叫 askInfoWithDefault
+        askInfoWithDefault(nil){
+            (sucess: Bool, toDo: String?) in
+            // 如果成功有輸入文字的話
+            if sucess == true {
+                if let okToDo = toDo {
+                    journeyName = okToDo
+                    self.journey[indexPath.row].name = journeyName
+                    print(indexPath.row, self.journey[indexPath.row])
+                    self.journeyTableView.reloadData()
+                    
+                    func archiveJourney(journey:[Journey]) -> NSData {
+                        let archivedObject = NSKeyedArchiver.archivedData(withRootObject: journey)
+                        return archivedObject as NSData
+                    }
+                    let archivedObject = archiveJourney(journey: self.journey)
+                    // Save to UserDefaults & 同步
+                    UserDefaults.standard.set(archivedObject, forKey: "Journey")
+                    UserDefaults.standard.synchronize()
+                }
+            }
+        }
+    }
+    
+    // 自訂按鈕(copy & delete)
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
+        // Delete Button (刪除)
+        let deleteAction = UITableViewRowAction(style: .default, title: "Delete", handler: { (action, indexPath) -> Void in
+            
+            self.journey.remove(at: indexPath.row)
+            self.journeyTableView.deleteRows(at: [indexPath], with: .fade)
+            func archiveJourney(journey:[Journey]) -> NSData {
+                let archivedObject = NSKeyedArchiver.archivedData(withRootObject: journey)
+                return archivedObject as NSData
+            }
+            let archivedObject = archiveJourney(journey: self.journey)
+            UserDefaults.standard.set(archivedObject, forKey: "Journey")
+            UserDefaults.standard.synchronize()
+        })
+        
+        // Copy Button (複製)
+        let copyAction = UITableViewRowAction(style: .default, title: "Copy", handler: { (action, indexPath) -> Void in
+            
+            self.journey.append(self.journey[indexPath.row])
+            self.journeyTableView.reloadData()
+            func archiveJourney(journey:[Journey]) -> NSData {
+                let archivedObject = NSKeyedArchiver.archivedData(withRootObject: journey)
+                return archivedObject as NSData
+            }
+            let archivedObject = archiveJourney(journey: self.journey)
+            UserDefaults.standard.set(archivedObject, forKey: "Journey")
+            UserDefaults.standard.synchronize()
+        })
+        
+        // Set the button color (課製按鈕顏色)
+        copyAction.backgroundColor = UIColor(red: 135.0/255.0, green: 216.0/255.0, blue: 209.0/255.0, alpha: 1)
+        deleteAction.backgroundColor = UIColor(red: 202.0/255.0, green: 202.0/255.0, blue: 203.0/255.0, alpha: 1.0)
+        
+        // 回傳按鈕
+        return [deleteAction, copyAction]
     }
     
     // MARK: - Navigation
@@ -201,30 +275,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Present
         present(myAlert, animated: true, completion: nil)
     }
-    
-    // 自訂按鈕(copy & delete)
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        
-        // Delete Button (刪除)
-        let deleteAction = UITableViewRowAction(style: .default, title: "Delete", handler: { (action, indexPath) -> Void in
-            
-                    self.journey.remove(at: indexPath.row)
-                    self.journeyTableView.deleteRows(at: [indexPath], with: .fade)
-        })
-        
-        // Copy Button (複製)
-        let copyAction = UITableViewRowAction(style: .default, title: "Copy", handler: { (action, indexPath) -> Void in
-            
-                    self.journey.append(self.journey[indexPath.row])
-                    self.journeyTableView.reloadData()
-        })
-        
-        // Set the button color (課製按鈕顏色)
-        copyAction.backgroundColor = UIColor(red: 135.0/255.0, green: 216.0/255.0, blue: 209.0/255.0, alpha: 1)
-        deleteAction.backgroundColor = UIColor(red: 202.0/255.0, green: 202.0/255.0, blue: 203.0/255.0, alpha: 1.0)
-        
-        // 回傳按鈕
-        return [deleteAction, copyAction]
-    }
 }
+
+
 
