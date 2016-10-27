@@ -203,13 +203,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             self.journey.append(self.journey[indexPath.row])
             self.journeyTableView.reloadData()
-            func archiveJourney(journey:[Journey]) -> NSData {
-                let archivedObject = NSKeyedArchiver.archivedData(withRootObject: journey)
-                return archivedObject as NSData
-            }
-            let archivedObject = archiveJourney(journey: self.journey)
-            UserDefaults.standard.set(archivedObject, forKey: "Journey")
-            UserDefaults.standard.synchronize()
         })
         
         // Set the button color (課製按鈕顏色)
