@@ -220,6 +220,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             if let indexPath = journeyTableView.indexPathForSelectedRow {
                 let dvc = segue.destination as? DetailTableViewController
                 dvc?.journey = journey[indexPath.row]
+                dvc?.index = indexPath.row
             }
         }
     }

@@ -12,6 +12,9 @@ class DetailTableViewController: UITableViewController {
     
     var journey: Journey?
     
+    var index: Int?
+    
+    // 按下按鈕，社群分享
     @IBAction func socialShare(_ sender: UIBarButtonItem) {
         
         if let name = journey?.name {
@@ -21,6 +24,7 @@ class DetailTableViewController: UITableViewController {
         }
     }
     
+    // 按下按鈕，新增Category
     @IBAction func addCate(_ sender: UIBarButtonItem) {
         // 使用我們寫好的函式
         askInfoWithDefault(nil) {
@@ -30,10 +34,24 @@ class DetailTableViewController: UITableViewController {
             if sucess == true {
                 if let okToDo = toDo {
                     
-                    // 把待辦事項存到okToDo 加到toDoArray & reload
+                    // creat & reload
                     self.journey?.categories.append(["cateName": okToDo,"items":
                         [["itemName": "修改名稱", "isPack":false]]])
                     self.tableView.reloadData()
+                    
+                    // Call journey array
+                    let controller = self.navigationController?.viewControllers.first as! ViewController
+                    var allJourney = controller.journey
+                    allJourney[self.index!] = self.journey!
+                    
+                    func archiveJourney(journey:[Journey]) -> NSData {
+                        let archivedObject = NSKeyedArchiver.archivedData(withRootObject: journey)
+                        return archivedObject as NSData
+                    }
+                    let archivedObject = archiveJourney(journey: allJourney)
+                    // Save to UserDefaults & 同步
+                    UserDefaults.standard.set(archivedObject, forKey: "Journey")
+                    UserDefaults.standard.synchronize()
                 }
             }
         }
@@ -48,30 +66,29 @@ class DetailTableViewController: UITableViewController {
         self.navigationItem.rightBarButtonItem = self.editButtonItem
         // Remove the separators of the empty rows
         tableView.tableFooterView = UIView(frame: CGRect.zero)
-//        // Cell 自動調整列高(未成功)
-//        tableView.estimatedRowHeight = 56.0
-//        tableView.rowHeight = UITableViewAutomaticDimension
-        
+        //        // Cell 自動調整列高(未成功)
+        //        tableView.estimatedRowHeight = 56.0
+        //        tableView.rowHeight = UITableViewAutomaticDimension
     }
-
-
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+    
     // MARK: - TableViewDataSource
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         
         return (journey?.categories.count)!
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let eachCate = self.journey?.categories[section]
         let items = eachCate?["items"] as! Array<Any>
         return (items.count + 1)
     }
-
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -95,7 +112,7 @@ class DetailTableViewController: UITableViewController {
             
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "newCell", for: indexPath)
-            return cell   
+            return cell
         }
     }
     
@@ -111,7 +128,7 @@ class DetailTableViewController: UITableViewController {
         header.textLabel?.textColor = UIColor.white
         return header
     }
-
+    
     // MARK: - UITableViewDelegate
     
     // Override to support conditional editing of the table view.
@@ -133,8 +150,24 @@ class DetailTableViewController: UITableViewController {
             items.remove(at: indexPath.row)
             eachCate?["items"] = items
             self.journey?.categories[indexPath.section] = eachCate!
+            
             // Delete the row from the data source
             tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            // Call journey array
+            let controller = self.navigationController?.viewControllers.first as! ViewController
+            var allJourney = controller.journey
+            allJourney[self.index!] = self.journey!
+            
+            func archiveJourney(journey:[Journey]) -> NSData {
+                let archivedObject = NSKeyedArchiver.archivedData(withRootObject: journey)
+                return archivedObject as NSData
+            }
+            let archivedObject = archiveJourney(journey: allJourney)
+            // Save to UserDefaults & 同步
+            UserDefaults.standard.set(archivedObject, forKey: "Journey")
+            UserDefaults.standard.synchronize()
+            
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
@@ -142,17 +175,31 @@ class DetailTableViewController: UITableViewController {
     
     // 設定 Row 重新排列
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-                var currentCate = self.journey?.categories[fromIndexPath.section]
-                var items = currentCate?["items"] as! Array<Any>
-                let tempText = items[to.row]
-                items[to.row] = items[fromIndexPath.row]
-                items[fromIndexPath.row] = tempText
+        var currentCate = self.journey?.categories[fromIndexPath.section]
+        var items = currentCate?["items"] as! Array<Any>
+        let tempText = items[to.row]
+        items[to.row] = items[fromIndexPath.row]
+        items[fromIndexPath.row] = tempText
         
-                // Update item
-                currentCate?["items"] = items
+        // Update item
+        currentCate?["items"] = items
         
-                // Update catgory data back
-                self.journey?.categories[fromIndexPath.section] = currentCate!
+        // Update catgory data back
+        self.journey?.categories[fromIndexPath.section] = currentCate!
+        
+        // Call journey array
+        let controller = self.navigationController?.viewControllers.first as! ViewController
+        var allJourney = controller.journey
+        allJourney[self.index!] = self.journey!
+        
+        func archiveJourney(journey:[Journey]) -> NSData {
+            let archivedObject = NSKeyedArchiver.archivedData(withRootObject: journey)
+            return archivedObject as NSData
+        }
+        let archivedObject = archiveJourney(journey: allJourney)
+        // Save to UserDefaults & 同步
+        UserDefaults.standard.set(archivedObject, forKey: "Journey")
+        UserDefaults.standard.synchronize()
     }
     
     // 按壓某列，切換打包與否
@@ -175,7 +222,7 @@ class DetailTableViewController: UITableViewController {
                 eachItem?["isPack"] = isPack
                 newCate[indexPath.row] = eachItem!
                 self.journey?.categories[indexPath.section]["items"] = newCate
-//                print(eachItem, isPack)
+                //                print(eachItem, isPack)
             } else {
                 let checkImage = UIImage(named: "Check")
                 cell.imageButton.setImage(checkImage, for: .normal)
@@ -185,7 +232,7 @@ class DetailTableViewController: UITableViewController {
                 eachItem?["isPack"] = isPack
                 newCate[indexPath.row] = eachItem!
                 self.journey?.categories[indexPath.section]["items"] = newCate
-//                print(eachItem, isPack)
+                //                print(eachItem, isPack)
             }
         } else {
             // 使用我們寫好的函式
@@ -196,27 +243,75 @@ class DetailTableViewController: UITableViewController {
                 if sucess == true {
                     if let okToDo = toDo {
                         
-                        // 把待辦事項存到okToDo 加到toDoArray & reload
+                        // Create & reload
                         var items = self.journey?.categories[indexPath.section]["items"] as! Array<Any>
                         items.append(["itemName": okToDo, "isPack":false])
                         self.journey?.categories[indexPath.section]["items"] = items
-//                        print(items, self.journey?.categories)
                         self.tableView.reloadData()
-
-                         //Save to UserDefaults & 同步
-//                        UserDefaults.standard.set(self.journey, forKey: "Journey")
-//                        UserDefaults.standard.synchronize()
+                        
+                        // Call journey array
+                        let controller = self.navigationController?.viewControllers.first as! ViewController
+                        var allJourney = controller.journey
+                        allJourney[self.index!] = self.journey!
+                        
+                        func archiveJourney(journey:[Journey]) -> NSData {
+                            let archivedObject = NSKeyedArchiver.archivedData(withRootObject: journey)
+                            return archivedObject as NSData
+                        }
+                        let archivedObject = archiveJourney(journey: allJourney)
+                        // Save to UserDefaults & 同步
+                        UserDefaults.standard.set(archivedObject, forKey: "Journey")
+                        UserDefaults.standard.synchronize()
                     }
                 }
             }
         }
     }
-
+    
     
     // 設定哪些item可移動
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         
         return true
+    }
+    
+    // 按下 i 之後要修改 toDo
+    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        // 找到按下的文字
+        var eachCate = (self.journey?.categories[indexPath.section])! as [String:Any]
+        var item = (eachCate["items"] as! Array<Any>)[indexPath.row] as! [String:Any]
+        var itemName = item["itemName"] as! String
+        var newCate = (eachCate["items"] as! [[String:Any]])
+        // 用該列文字呼叫 askInfoWithDefault
+        askInfoWithDefault(itemName){
+            (sucess: Bool, toDo: String?) in
+            // 如果成功有輸入文字的話
+            if sucess == true {
+                if let okToDo = toDo {
+                    
+                    // update & reload
+                    itemName = okToDo
+                    item["itemName"] = itemName
+                    newCate[indexPath.row] = item
+                    self.journey?.categories[indexPath.section]["items"] = newCate
+                    self.tableView.reloadData()
+                    
+                    // Call journey array
+                    let controller = self.navigationController?.viewControllers.first as! ViewController
+                    var allJourney = controller.journey
+                    allJourney[self.index!] = self.journey!
+                    
+                    func archiveJourney(journey:[Journey]) -> NSData {
+                        let archivedObject = NSKeyedArchiver.archivedData(withRootObject: journey)
+                        return archivedObject as NSData
+                    }
+                    let archivedObject = archiveJourney(journey: allJourney)
+                    // Save to UserDefaults & 同步
+                    UserDefaults.standard.set(archivedObject, forKey: "Journey")
+                    UserDefaults.standard.synchronize()
+                }
+            }
+        }
     }
     
     // 新增項目功能
@@ -264,34 +359,8 @@ class DetailTableViewController: UITableViewController {
         present(myAlert, animated: true, completion: nil)
     }
     
-    // 按下 i 之後要修改 toDo
-    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        // 找到按下的文字
-        var eachCate = (self.journey?.categories[indexPath.section])! as [String:Any]
-        var item = (eachCate["items"] as! Array<Any>)[indexPath.row] as! [String:Any]
-        var itemName = item["itemName"] as! String
-        var newCate = (eachCate["items"] as! [[String:Any]])
-        // 用該列文字呼叫 askInfoWithDefault
-        askInfoWithDefault(itemName){
-            (sucess: Bool, toDo: String?) in
-            // 如果成功有輸入文字的話
-            if sucess == true {
-                if let okToDo = toDo {
-                    itemName = okToDo
-                    item["itemName"] = itemName
-                    newCate[indexPath.row] = item
-                    self.journey?.categories[indexPath.section]["items"] = newCate
-                    self.tableView.reloadData()
-                }
-            }
-        }
-    }
-
-    
-
-    
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showPlay" {
@@ -301,9 +370,10 @@ class DetailTableViewController: UITableViewController {
         }
     }
     
-
+    
 }
 
+// MARK: - Extension
 // Add Done button for Keyboard
 extension UITextField {
     

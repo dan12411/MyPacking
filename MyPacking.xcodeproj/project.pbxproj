@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		560D4DF11DC0E01B00D58AC1 /* ItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560D4DF01DC0E01B00D58AC1 /* ItemCollectionViewCell.swift */; };
 		562990221DB7A1E7005DA072 /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562990211DB7A1E7005DA072 /* ItemTableViewCell.swift */; };
+		56A0700A1DC31C33003E177D /* Journey.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 56A070081DC31C33003E177D /* Journey.xcdatamodeld */; };
 		56DE8F741DC0DAE300CA73D4 /* DetailCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DE8F731DC0DAE300CA73D4 /* DetailCollectionViewController.swift */; };
 		56FBDA431DB5B293005935EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FBDA421DB5B293005935EB /* AppDelegate.swift */; };
 		56FBDA451DB5B293005935EB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FBDA441DB5B293005935EB /* ViewController.swift */; };
@@ -22,6 +23,7 @@
 /* Begin PBXFileReference section */
 		560D4DF01DC0E01B00D58AC1 /* ItemCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		562990211DB7A1E7005DA072 /* ItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
+		56A070091DC31C33003E177D /* Journey.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Journey.xcdatamodel; sourceTree = "<group>"; };
 		56DE8F731DC0DAE300CA73D4 /* DetailCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailCollectionViewController.swift; sourceTree = "<group>"; };
 		56FBDA3F1DB5B293005935EB /* MyPacking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyPacking.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56FBDA421DB5B293005935EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 				56FBDA4B1DB5B293005935EB /* LaunchScreen.storyboard */,
 				56FBDA4E1DB5B293005935EB /* Info.plist */,
 				56FBDA581DB65E77005935EB /* Journey.swift */,
+				56A070081DC31C33003E177D /* Journey.xcdatamodeld */,
 			);
 			path = MyPacking;
 			sourceTree = "<group>";
@@ -152,6 +155,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56A0700A1DC31C33003E177D /* Journey.xcdatamodeld in Sources */,
 				56FBDA571DB65C73005935EB /* DetailTableViewController.swift in Sources */,
 				56FBDA451DB5B293005935EB /* ViewController.swift in Sources */,
 				562990221DB7A1E7005DA072 /* ItemTableViewCell.swift in Sources */,
@@ -325,6 +329,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		56A070081DC31C33003E177D /* Journey.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				56A070091DC31C33003E177D /* Journey.xcdatamodel */,
+			);
+			currentVersion = 56A070091DC31C33003E177D /* Journey.xcdatamodel */;
+			path = Journey.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 56FBDA371DB5B293005935EB /* Project object */;
 }
