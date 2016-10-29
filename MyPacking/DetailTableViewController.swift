@@ -175,6 +175,7 @@ class DetailTableViewController: UITableViewController {
             var eachCate = journey?.categories[indexPath.section]
             var eachItem = ((eachCate?["items"]) as? [[String:Any]])?[indexPath.row]
             var isPack = eachItem?["isPack"] as! Bool
+           // var number = eachItem?["number"] as! Int
             let cell = tableView.cellForRow(at: indexPath) as! ItemTableViewCell
             
             if isPack {
@@ -184,6 +185,8 @@ class DetailTableViewController: UITableViewController {
                 var newCate = (eachCate?["items"] as! [[String:Any]])
                 isPack = false
                 eachItem?["isPack"] = isPack
+               // number = 0
+               // eachItem?["number"] = number
                 newCate[indexPath.row] = eachItem!
                 self.journey?.categories[indexPath.section]["items"] = newCate
                 // save data
@@ -195,6 +198,8 @@ class DetailTableViewController: UITableViewController {
                 var newCate = (eachCate?["items"] as! [[String:Any]])
                 isPack = true
                 eachItem?["isPack"] = isPack
+               // number = Int(cell.itemCount.text!)!
+               // eachItem?["number"] = number
                 newCate[indexPath.row] = eachItem!
                 self.journey?.categories[indexPath.section]["items"] = newCate
                 // save data

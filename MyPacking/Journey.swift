@@ -8,13 +8,14 @@
 
 import Foundation
 
-class Journey: NSObject, NSCoding {
+class Journey: NSObject, NSCoding, NSCopying {
     var name: String?
     var categories = [
         ["cateName": "",
          "items" :
             [["itemName" : "",
-             "isPack" : false]]
+             "isPack" : false,
+             "number" : 0 ]]
         ]
     ]
     
@@ -33,6 +34,11 @@ class Journey: NSObject, NSCoding {
     func encode(with aCoder: NSCoder) {
         aCoder.encode(name, forKey: "name")
         aCoder.encode(categories, forKey: "categories")
+    }
+    
+    func copy(with zone: NSZone? = nil) -> Any {
+        let copy = Journey(name: name!, categories: categories)
+        return copy
     }
 }
 

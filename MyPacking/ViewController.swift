@@ -20,38 +20,38 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 name:"日本行(預設)",
                 categories: [
                     ["cateName" : "證件 & 隨身用品",
-                    "items" : [["itemName":"護照", "isPack":false],
-                               ["itemName":"身分證", "isPack":false],
-                               ["itemName":"錢包", "isPack":false],
-                               ["itemName":"手錶", "isPack":false]]],
+                    "items" : [["itemName":"護照", "isPack":false, "number":0],
+                               ["itemName":"身分證", "isPack":false, "number":0],
+                               ["itemName":"錢包", "isPack":false, "number":0],
+                               ["itemName":"手錶", "isPack":false, "number":0]]],
                     ["cateName" : "衣物",
-                     "items" : [["itemName":"上衣", "isPack":false],
-                                ["itemName":"外套", "isPack":false],
-                                ["itemName":"褲子", "isPack":false],
-                                ["itemName":"襪子", "isPack":false]]],
+                     "items" : [["itemName":"上衣", "isPack":false, "number":0],
+                                ["itemName":"外套", "isPack":false, "number":0],
+                                ["itemName":"褲子", "isPack":false, "number":0],
+                                ["itemName":"襪子", "isPack":false, "number":0]]],
                     ["cateName" : "盆洗用具",
-                     "items" : [["itemName":"牙膏", "isPack":false],
-                                ["itemName":"牙刷", "isPack":false],
-                                ["itemName":"刮鬍刀", "isPack":false]]],
+                     "items" : [["itemName":"牙膏", "isPack":false, "number":0],
+                                ["itemName":"牙刷", "isPack":false, "number":0],
+                                ["itemName":"刮鬍刀", "isPack":false, "number":0]]],
                     ["cateName" : "電器",
-                     "items" : [["itemName":"手機", "isPack":false],
-                                ["itemName":"Macbook", "isPack":false],
-                                ["itemName":"充電器", "isPack":false],
-                                ["itemName":"OOOOOOOOOOOOOOOOOOOOOOO", "isPack":false]]]
+                     "items" : [["itemName":"手機", "isPack":false, "number":0],
+                                ["itemName":"Macbook", "isPack":false, "number":0],
+                                ["itemName":"充電器", "isPack":false, "number":0],
+                                ["itemName":"OOOOOOOOOOOOOOOOOOOOOOO", "isPack":false, "number":0]]]
                             ]
                     ),
             Journey(
                 name:"冰島自助(預設)",
                 categories: [
                         ["cateName" : "衣物",
-                        "items" : [["itemName":"上衣", "isPack":false],
-                                   ["itemName":"外套", "isPack":false],
-                                   ["itemName":"褲子", "isPack":false],
-                                   ["itemName":"襪子", "isPack":false]]],
+                        "items" : [["itemName":"上衣", "isPack":false, "number":0],
+                                   ["itemName":"外套", "isPack":false, "number":0],
+                                   ["itemName":"褲子", "isPack":false, "number":0],
+                                   ["itemName":"襪子", "isPack":false, "number":0]]],
                         ["cateName" : "盆洗用具",
-                        "items" : [["itemName":"牙膏", "isPack":false],
-                                   ["itemName":"牙刷", "isPack":false],
-                                   ["itemName":"刮鬍刀", "isPack":false]]]
+                        "items" : [["itemName":"牙膏", "isPack":false, "number":0],
+                                   ["itemName":"牙刷", "isPack":false, "number":0],
+                                   ["itemName":"刮鬍刀", "isPack":false, "number":0]]]
                             ]
                     )
         ]
@@ -145,12 +145,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
-    // 按下 i 之後要修改 (未完成!!!)
+    // 按下 i 之後要修改
     func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         // 找到按下的文字
         var journeyName = journey[indexPath.row].name as String!
         // 用該列文字呼叫 askInfoWithDefault
-        askInfoWithDefault(nil){
+        askInfoWithDefault(journeyName){
             (sucess: Bool, toDo: String?) in
             // 如果成功有輸入文字的話
             if sucess == true {
@@ -179,8 +179,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         // Copy Button (複製)
         let copyAction = UITableViewRowAction(style: .default, title: "Copy", handler: { (action, indexPath) -> Void in
-            
-            self.journey.append(self.journey[indexPath.row])
+            // copy data
+            let copyJourney = (self.journey[indexPath.row]).copy() as! Journey
+            self.journey.append(copyJourney)
             self.journeyTableView.reloadData()
             // save data
             self.saveJourney()
