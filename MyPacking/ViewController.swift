@@ -67,19 +67,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 if let okToDo = toDo {
                     
                     // 把待辦事項存到okToDo 加到toDoArray & reload
-                    var newJourney = Journey(name: "", categories: [])
+                    let newJourney = Journey(name: "", categories: [])
                     newJourney.name = okToDo
                     self.journey.append(newJourney)
                     self.journeyTableView.reloadData()
-                    
-                    func archiveJourney(journey:[Journey]) -> NSData {
-                        let archivedObject = NSKeyedArchiver.archivedData(withRootObject: journey)
-                        return archivedObject as NSData
-                    }
-                    let archivedObject = archiveJourney(journey: self.journey)
-                    // Save to UserDefaults & 同步
-                    UserDefaults.standard.set(archivedObject, forKey: "Journey")
-                    UserDefaults.standard.synchronize()
+                    // save data
+                    self.saveJourney()
                 }
             }
         }
@@ -94,7 +87,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             if let unarchivedJourney = NSKeyedUnarchiver.unarchiveObject(with: archivedObject as! Data) as? [Journey] {
                 self.journey = unarchivedJourney
                 self.journeyTableView.reloadData()
-                print("unarchivedJourney: ===============\(unarchivedJourney)==================")
             } else {
                 print("Failed to unarchive journey")
             }
@@ -165,17 +157,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 if let okToDo = toDo {
                     journeyName = okToDo
                     self.journey[indexPath.row].name = journeyName
-                    print(indexPath.row, self.journey[indexPath.row])
                     self.journeyTableView.reloadData()
-                    
-                    func archiveJourney(journey:[Journey]) -> NSData {
-                        let archivedObject = NSKeyedArchiver.archivedData(withRootObject: journey)
-                        return archivedObject as NSData
-                    }
-                    let archivedObject = archiveJourney(journey: self.journey)
-                    // Save to UserDefaults & 同步
-                    UserDefaults.standard.set(archivedObject, forKey: "Journey")
-                    UserDefaults.standard.synchronize()
+                    // save data
+                    self.saveJourney()
                 }
             }
         }
@@ -189,13 +173,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             self.journey.remove(at: indexPath.row)
             self.journeyTableView.deleteRows(at: [indexPath], with: .fade)
-            func archiveJourney(journey:[Journey]) -> NSData {
-                let archivedObject = NSKeyedArchiver.archivedData(withRootObject: journey)
-                return archivedObject as NSData
-            }
-            let archivedObject = archiveJourney(journey: self.journey)
-            UserDefaults.standard.set(archivedObject, forKey: "Journey")
-            UserDefaults.standard.synchronize()
+            // save data
+            self.saveJourney()
         })
         
         // Copy Button (複製)
@@ -203,6 +182,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             self.journey.append(self.journey[indexPath.row])
             self.journeyTableView.reloadData()
+            // save data
+            self.saveJourney()
         })
         
         // Set the button color (課製按鈕顏色)
@@ -242,7 +223,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // OK Button
         let okAction = UIAlertAction(title: "OK", style: .default) {
             (action) in
-            
             // 拿到使用者輸入在第一個文字輸入框內的文字(textFields是Array)
             let inputText = myAlert.textFields?[0].text
             
@@ -265,9 +245,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         myAlert.addAction(okAction)
         myAlert.addAction(cancelAction)
         
-        
         // Present
         present(myAlert, animated: true, completion: nil)
+    }
+    
+    func saveJourney() {
+        func archiveJourney(journey:[Journey]) -> NSData {
+            let archivedObject = NSKeyedArchiver.archivedData(withRootObject: journey)
+            return archivedObject as NSData
+        }
+        let archivedObject = archiveJourney(journey: self.journey)
+        UserDefaults.standard.set(archivedObject, forKey: "Journey")
+        UserDefaults.standard.synchronize()
     }
 }
 

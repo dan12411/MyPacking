@@ -38,20 +38,8 @@ class DetailTableViewController: UITableViewController {
                     self.journey?.categories.append(["cateName": okToDo,"items":
                         [["itemName": "修改名稱", "isPack":false]]])
                     self.tableView.reloadData()
-                    
-                    // Call journey array
-                    let controller = self.navigationController?.viewControllers.first as! ViewController
-                    var allJourney = controller.journey
-                    allJourney[self.index!] = self.journey!
-                    
-                    func archiveJourney(journey:[Journey]) -> NSData {
-                        let archivedObject = NSKeyedArchiver.archivedData(withRootObject: journey)
-                        return archivedObject as NSData
-                    }
-                    let archivedObject = archiveJourney(journey: allJourney)
-                    // Save to UserDefaults & 同步
-                    UserDefaults.standard.set(archivedObject, forKey: "Journey")
-                    UserDefaults.standard.synchronize()
+                    // save data
+                    self.saveData()
                 }
             }
         }
@@ -153,20 +141,8 @@ class DetailTableViewController: UITableViewController {
             
             // Delete the row from the data source
             tableView.deleteRows(at: [indexPath], with: .fade)
-            
-            // Call journey array
-            let controller = self.navigationController?.viewControllers.first as! ViewController
-            var allJourney = controller.journey
-            allJourney[self.index!] = self.journey!
-            
-            func archiveJourney(journey:[Journey]) -> NSData {
-                let archivedObject = NSKeyedArchiver.archivedData(withRootObject: journey)
-                return archivedObject as NSData
-            }
-            let archivedObject = archiveJourney(journey: allJourney)
-            // Save to UserDefaults & 同步
-            UserDefaults.standard.set(archivedObject, forKey: "Journey")
-            UserDefaults.standard.synchronize()
+            // save data
+            self.saveData()
             
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
@@ -186,20 +162,8 @@ class DetailTableViewController: UITableViewController {
         
         // Update catgory data back
         self.journey?.categories[fromIndexPath.section] = currentCate!
-        
-        // Call journey array
-        let controller = self.navigationController?.viewControllers.first as! ViewController
-        var allJourney = controller.journey
-        allJourney[self.index!] = self.journey!
-        
-        func archiveJourney(journey:[Journey]) -> NSData {
-            let archivedObject = NSKeyedArchiver.archivedData(withRootObject: journey)
-            return archivedObject as NSData
-        }
-        let archivedObject = archiveJourney(journey: allJourney)
-        // Save to UserDefaults & 同步
-        UserDefaults.standard.set(archivedObject, forKey: "Journey")
-        UserDefaults.standard.synchronize()
+        // save data
+        self.saveData()
     }
     
     // 按壓某列，切換打包與否
@@ -222,7 +186,8 @@ class DetailTableViewController: UITableViewController {
                 eachItem?["isPack"] = isPack
                 newCate[indexPath.row] = eachItem!
                 self.journey?.categories[indexPath.section]["items"] = newCate
-                //                print(eachItem, isPack)
+                // save data
+                self.saveData()
             } else {
                 let checkImage = UIImage(named: "Check")
                 cell.imageButton.setImage(checkImage, for: .normal)
@@ -232,7 +197,8 @@ class DetailTableViewController: UITableViewController {
                 eachItem?["isPack"] = isPack
                 newCate[indexPath.row] = eachItem!
                 self.journey?.categories[indexPath.section]["items"] = newCate
-                //                print(eachItem, isPack)
+                // save data
+                self.saveData()
             }
         } else {
             // 使用我們寫好的函式
@@ -248,20 +214,8 @@ class DetailTableViewController: UITableViewController {
                         items.append(["itemName": okToDo, "isPack":false])
                         self.journey?.categories[indexPath.section]["items"] = items
                         self.tableView.reloadData()
-                        
-                        // Call journey array
-                        let controller = self.navigationController?.viewControllers.first as! ViewController
-                        var allJourney = controller.journey
-                        allJourney[self.index!] = self.journey!
-                        
-                        func archiveJourney(journey:[Journey]) -> NSData {
-                            let archivedObject = NSKeyedArchiver.archivedData(withRootObject: journey)
-                            return archivedObject as NSData
-                        }
-                        let archivedObject = archiveJourney(journey: allJourney)
-                        // Save to UserDefaults & 同步
-                        UserDefaults.standard.set(archivedObject, forKey: "Journey")
-                        UserDefaults.standard.synchronize()
+                        // save data
+                        self.saveData()
                     }
                 }
             }
@@ -295,20 +249,8 @@ class DetailTableViewController: UITableViewController {
                     newCate[indexPath.row] = item
                     self.journey?.categories[indexPath.section]["items"] = newCate
                     self.tableView.reloadData()
-                    
-                    // Call journey array
-                    let controller = self.navigationController?.viewControllers.first as! ViewController
-                    var allJourney = controller.journey
-                    allJourney[self.index!] = self.journey!
-                    
-                    func archiveJourney(journey:[Journey]) -> NSData {
-                        let archivedObject = NSKeyedArchiver.archivedData(withRootObject: journey)
-                        return archivedObject as NSData
-                    }
-                    let archivedObject = archiveJourney(journey: allJourney)
-                    // Save to UserDefaults & 同步
-                    UserDefaults.standard.set(archivedObject, forKey: "Journey")
-                    UserDefaults.standard.synchronize()
+                    // save data
+                    self.saveData()
                 }
             }
         }
@@ -368,6 +310,22 @@ class DetailTableViewController: UITableViewController {
                 dvc.journey = self.journey
             }
         }
+    }
+    
+    func saveData() {
+        // Call journey array
+        let controller = self.navigationController?.viewControllers.first as! ViewController
+        var allJourney = controller.journey
+        allJourney[self.index!] = self.journey!
+        
+        func archiveJourney(journey:[Journey]) -> NSData {
+            let archivedObject = NSKeyedArchiver.archivedData(withRootObject: journey)
+            return archivedObject as NSData
+        }
+        let archivedObject = archiveJourney(journey: allJourney)
+        // Save to UserDefaults & 同步
+        UserDefaults.standard.set(archivedObject, forKey: "Journey")
+        UserDefaults.standard.synchronize()
     }
     
     
