@@ -12,7 +12,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBOutlet weak var journeyTableView: UITableView!
     
-//    var journey = [Journey]()
+    //    var journey = [Journey]()
     
     var journey: [Journey] =
         [
@@ -20,10 +20,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 name:"日本行(預設)",
                 categories: [
                     ["cateName" : "證件 & 隨身用品",
-                    "items" : [["itemName":"護照", "isPack":false, "number":0],
-                               ["itemName":"身分證", "isPack":false, "number":0],
-                               ["itemName":"錢包", "isPack":false, "number":0],
-                               ["itemName":"手錶", "isPack":false, "number":0]]],
+                     "items" : [["itemName":"護照", "isPack":false, "number":0],
+                                ["itemName":"身分證", "isPack":false, "number":0],
+                                ["itemName":"錢包", "isPack":false, "number":0],
+                                ["itemName":"手錶", "isPack":false, "number":0]]],
                     ["cateName" : "衣物",
                      "items" : [["itemName":"上衣", "isPack":false, "number":0],
                                 ["itemName":"外套", "isPack":false, "number":0],
@@ -38,23 +38,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                                 ["itemName":"Macbook", "isPack":false, "number":0],
                                 ["itemName":"充電器", "isPack":false, "number":0],
                                 ["itemName":"OOOOOOOOOOOOOOOOOOOOOOO", "isPack":false, "number":0]]]
-                            ]
-                    ),
+                ]
+            ),
             Journey(
                 name:"冰島自助(預設)",
                 categories: [
-                        ["cateName" : "衣物",
-                        "items" : [["itemName":"上衣", "isPack":false, "number":0],
-                                   ["itemName":"外套", "isPack":false, "number":0],
-                                   ["itemName":"褲子", "isPack":false, "number":0],
-                                   ["itemName":"襪子", "isPack":false, "number":0]]],
-                        ["cateName" : "盆洗用具",
-                        "items" : [["itemName":"牙膏", "isPack":false, "number":0],
-                                   ["itemName":"牙刷", "isPack":false, "number":0],
-                                   ["itemName":"刮鬍刀", "isPack":false, "number":0]]]
-                            ]
-                    )
-        ]
+                    ["cateName" : "衣物",
+                     "items" : [["itemName":"上衣", "isPack":false, "number":0],
+                                ["itemName":"外套", "isPack":false, "number":0],
+                                ["itemName":"褲子", "isPack":false, "number":0],
+                                ["itemName":"襪子", "isPack":false, "number":0]]],
+                    ["cateName" : "盆洗用具",
+                     "items" : [["itemName":"牙膏", "isPack":false, "number":0],
+                                ["itemName":"牙刷", "isPack":false, "number":0],
+                                ["itemName":"刮鬍刀", "isPack":false, "number":0]]]
+                ]
+            )
+    ]
     
     //按下按鈕，新增旅程
     @IBAction func addNewJorney(_ sender: UIButton) {
@@ -77,7 +77,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
         }
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.journeyTableView.reloadData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -122,14 +125,36 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-     
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! JourneyTableViewCell
+        
         let currentJourney = self.journey[indexPath.row]
-        let journeyName: String = currentJourney.name! 
+        let journeyName: String = currentJourney.name!
+        let numberOfCate = currentJourney.categories.count
+        var numberOfEachItems = 0
+        var numberOfItems = 0
+        var numberOfPacked = 0
+        var totalOfPacked = 0
+        for i in 0..<numberOfCate {
+            let items = currentJourney.categories[i]["items"] as! [[String:Any]]
+            numberOfEachItems = items.count
+            numberOfItems += items.count
+            for j in 0..<numberOfEachItems {
+                if items[j]["isPack"] as! Bool == true {
+                    let packed = (items[j]["number"]) as! Int
+                    numberOfPacked += 1
+                    totalOfPacked += packed
+                }
+            }
+        }
         
-        cell.textLabel?.text = journeyName
+        let ratio  = Int((Double(totalOfPacked) / Double((numberOfItems+(totalOfPacked-numberOfPacked)))) * 100)
         
+        cell.journeyLabel.text = journeyName
+        cell.ratioLabel?.text = String(ratio) + "%"
+        cell.ratioProgress.progress = Float(ratio)/100.0
+
         return cell
+        
     }
     
     // MARK:- TableViewDelegate
@@ -197,7 +222,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
+        
         if segue.identifier == "showDetail" {
             if let indexPath = journeyTableView.indexPathForSelectedRow {
                 let dvc = segue.destination as? DetailTableViewController

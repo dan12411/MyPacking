@@ -8,8 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		560D4DF11DC0E01B00D58AC1 /* ItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560D4DF01DC0E01B00D58AC1 /* ItemCollectionViewCell.swift */; };
+		5621B2C11DC5019C00C114C5 /* Journey.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5621B2BF1DC5019C00C114C5 /* Journey.xcdatamodeld */; };
 		562990221DB7A1E7005DA072 /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562990211DB7A1E7005DA072 /* ItemTableViewCell.swift */; };
-		56A0700A1DC31C33003E177D /* Journey.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 56A070081DC31C33003E177D /* Journey.xcdatamodeld */; };
+		5692C6A81DC4F8CE00A3220B /* JourneyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5692C6A71DC4F8CE00A3220B /* JourneyTableViewCell.swift */; };
 		56DE8F741DC0DAE300CA73D4 /* DetailCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DE8F731DC0DAE300CA73D4 /* DetailCollectionViewController.swift */; };
 		56FBDA431DB5B293005935EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FBDA421DB5B293005935EB /* AppDelegate.swift */; };
 		56FBDA451DB5B293005935EB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FBDA441DB5B293005935EB /* ViewController.swift */; };
@@ -22,8 +23,9 @@
 
 /* Begin PBXFileReference section */
 		560D4DF01DC0E01B00D58AC1 /* ItemCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCollectionViewCell.swift; sourceTree = "<group>"; };
+		5621B2C01DC5019C00C114C5 /* Journey.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Journey.xcdatamodel; sourceTree = "<group>"; };
 		562990211DB7A1E7005DA072 /* ItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
-		56A070091DC31C33003E177D /* Journey.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Journey.xcdatamodel; sourceTree = "<group>"; };
+		5692C6A71DC4F8CE00A3220B /* JourneyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JourneyTableViewCell.swift; sourceTree = "<group>"; };
 		56DE8F731DC0DAE300CA73D4 /* DetailCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailCollectionViewController.swift; sourceTree = "<group>"; };
 		56FBDA3F1DB5B293005935EB /* MyPacking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyPacking.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56FBDA421DB5B293005935EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -47,6 +49,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5692C6A91DC4F8DC00A3220B /* First View */ = {
+			isa = PBXGroup;
+			children = (
+				56FBDA441DB5B293005935EB /* ViewController.swift */,
+				5692C6A71DC4F8CE00A3220B /* JourneyTableViewCell.swift */,
+			);
+			name = "First View";
+			sourceTree = "<group>";
+		};
+		5692C6AA1DC4F8F600A3220B /* Second View */ = {
+			isa = PBXGroup;
+			children = (
+				56FBDA561DB65C73005935EB /* DetailTableViewController.swift */,
+				562990211DB7A1E7005DA072 /* ItemTableViewCell.swift */,
+			);
+			name = "Second View";
+			sourceTree = "<group>";
+		};
+		5692C6AB1DC4F90800A3220B /* Third View */ = {
+			isa = PBXGroup;
+			children = (
+				56DE8F731DC0DAE300CA73D4 /* DetailCollectionViewController.swift */,
+				560D4DF01DC0E01B00D58AC1 /* ItemCollectionViewCell.swift */,
+			);
+			name = "Third View";
+			sourceTree = "<group>";
+		};
 		56FBDA361DB5B293005935EB = {
 			isa = PBXGroup;
 			children = (
@@ -67,17 +96,15 @@
 			isa = PBXGroup;
 			children = (
 				56FBDA421DB5B293005935EB /* AppDelegate.swift */,
-				56FBDA441DB5B293005935EB /* ViewController.swift */,
-				56FBDA561DB65C73005935EB /* DetailTableViewController.swift */,
-				562990211DB7A1E7005DA072 /* ItemTableViewCell.swift */,
-				56DE8F731DC0DAE300CA73D4 /* DetailCollectionViewController.swift */,
-				560D4DF01DC0E01B00D58AC1 /* ItemCollectionViewCell.swift */,
+				5692C6A91DC4F8DC00A3220B /* First View */,
+				5692C6AA1DC4F8F600A3220B /* Second View */,
+				5692C6AB1DC4F90800A3220B /* Third View */,
 				56FBDA461DB5B293005935EB /* Main.storyboard */,
+				56FBDA581DB65E77005935EB /* Journey.swift */,
 				56FBDA491DB5B293005935EB /* Assets.xcassets */,
 				56FBDA4B1DB5B293005935EB /* LaunchScreen.storyboard */,
 				56FBDA4E1DB5B293005935EB /* Info.plist */,
-				56FBDA581DB65E77005935EB /* Journey.swift */,
-				56A070081DC31C33003E177D /* Journey.xcdatamodeld */,
+				5621B2BF1DC5019C00C114C5 /* Journey.xcdatamodeld */,
 			);
 			path = MyPacking;
 			sourceTree = "<group>";
@@ -109,7 +136,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "洪德晟";
 				TargetAttributes = {
 					56FBDA3E1DB5B293005935EB = {
@@ -155,11 +182,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				56A0700A1DC31C33003E177D /* Journey.xcdatamodeld in Sources */,
 				56FBDA571DB65C73005935EB /* DetailTableViewController.swift in Sources */,
 				56FBDA451DB5B293005935EB /* ViewController.swift in Sources */,
 				562990221DB7A1E7005DA072 /* ItemTableViewCell.swift in Sources */,
 				56DE8F741DC0DAE300CA73D4 /* DetailCollectionViewController.swift in Sources */,
+				5621B2C11DC5019C00C114C5 /* Journey.xcdatamodeld in Sources */,
+				5692C6A81DC4F8CE00A3220B /* JourneyTableViewCell.swift in Sources */,
 				56FBDA431DB5B293005935EB /* AppDelegate.swift in Sources */,
 				56FBDA591DB65E77005935EB /* Journey.swift in Sources */,
 				560D4DF11DC0E01B00D58AC1 /* ItemCollectionViewCell.swift in Sources */,
@@ -206,6 +234,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -256,6 +285,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -331,12 +361,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		56A070081DC31C33003E177D /* Journey.xcdatamodeld */ = {
+		5621B2BF1DC5019C00C114C5 /* Journey.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				56A070091DC31C33003E177D /* Journey.xcdatamodel */,
+				5621B2C01DC5019C00C114C5 /* Journey.xcdatamodel */,
 			);
-			currentVersion = 56A070091DC31C33003E177D /* Journey.xcdatamodel */;
+			currentVersion = 5621B2C01DC5019C00C114C5 /* Journey.xcdatamodel */;
 			path = Journey.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
