@@ -10,6 +10,31 @@ import UIKit
 
 class DetailTableViewController: UITableViewController {
     
+    @IBAction func changeCount(_ sender: UITextField) {
+        var cell = sender.superview
+        while cell is UITableViewCell == false {
+            cell = cell?.superview
+        }
+        let targetCell = cell as! UITableViewCell
+        if let indexPath = self.tableView.indexPath(for: targetCell) {
+        
+        var eachCate = journey?.categories[(indexPath.section)]
+        var eachItem = ((eachCate?["items"]) as? [[String:Any]])?[(indexPath.row)]
+        var number = eachItem?["number"] as! Int
+        var newCate = (eachCate?["items"] as! [[String:Any]])
+        let theCell = tableView.cellForRow(at: indexPath) as! ItemTableViewCell
+        if let count = theCell.itemCount.text {
+            number = Int(count)!
+        }
+        eachItem?["number"] = number
+        newCate[(indexPath.row)] = eachItem!
+        print("=============\(eachItem)===============")
+        self.journey?.categories[indexPath.section]["items"] = newCate
+        // save data
+        self.saveData()
+        }
+    }
+    
     var journey: Journey?
     
     var index: Int?

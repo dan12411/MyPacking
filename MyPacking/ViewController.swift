@@ -85,7 +85,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // 新增旅程並重整
         if let archivedObject = UserDefaults.standard.object(forKey: "Journey") {
             if let unarchivedJourney = NSKeyedUnarchiver.unarchiveObject(with: archivedObject as! Data) as? [Journey] {
@@ -278,6 +277,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         present(myAlert, animated: true, completion: nil)
     }
     
+    // 解編碼 ＆ 儲存
     func saveJourney() {
         func archiveJourney(journey:[Journey]) -> NSData {
             let archivedObject = NSKeyedArchiver.archivedData(withRootObject: journey)
