@@ -20,38 +20,38 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 name:"日本行(預設)",
                 categories: [
                     ["cateName" : "證件 & 隨身用品",
-                     "items" : [["itemName":"護照", "isPack":false, "number":0],
-                                ["itemName":"身分證", "isPack":false, "number":0],
-                                ["itemName":"錢包", "isPack":false, "number":0],
-                                ["itemName":"手錶", "isPack":false, "number":0]]],
+                     "items" : [["itemName":"護照", "isPack":false, "number":1],
+                                ["itemName":"身分證", "isPack":false, "number":1],
+                                ["itemName":"錢包", "isPack":false, "number":1],
+                                ["itemName":"手錶", "isPack":false, "number":1]]],
                     ["cateName" : "衣物",
-                     "items" : [["itemName":"上衣", "isPack":false, "number":0],
-                                ["itemName":"外套", "isPack":false, "number":0],
-                                ["itemName":"褲子", "isPack":false, "number":0],
-                                ["itemName":"襪子", "isPack":false, "number":0]]],
+                     "items" : [["itemName":"上衣", "isPack":false, "number":1],
+                                ["itemName":"外套", "isPack":false, "number":1],
+                                ["itemName":"褲子", "isPack":false, "number":1],
+                                ["itemName":"襪子", "isPack":false, "number":1]]],
                     ["cateName" : "盆洗用具",
-                     "items" : [["itemName":"牙膏", "isPack":false, "number":0],
-                                ["itemName":"牙刷", "isPack":false, "number":0],
-                                ["itemName":"刮鬍刀", "isPack":false, "number":0]]],
+                     "items" : [["itemName":"牙膏", "isPack":false, "number":1],
+                                ["itemName":"牙刷", "isPack":false, "number":1],
+                                ["itemName":"刮鬍刀", "isPack":false, "number":1]]],
                     ["cateName" : "電器",
-                     "items" : [["itemName":"手機", "isPack":false, "number":0],
-                                ["itemName":"Macbook", "isPack":false, "number":0],
-                                ["itemName":"充電器", "isPack":false, "number":0],
-                                ["itemName":"OOOOOOOOOOOOOOOOOOOOOOO", "isPack":false, "number":0]]]
+                     "items" : [["itemName":"手機", "isPack":false, "number":1],
+                                ["itemName":"Macbook", "isPack":false, "number":1],
+                                ["itemName":"充電器", "isPack":false, "number":1],
+                                ["itemName":"OOOOOOOOOOOOOOOOOOOOOOO", "isPack":false, "number":1]]]
                 ]
             ),
             Journey(
                 name:"冰島自助(預設)",
                 categories: [
                     ["cateName" : "衣物",
-                     "items" : [["itemName":"上衣", "isPack":false, "number":0],
-                                ["itemName":"外套", "isPack":false, "number":0],
-                                ["itemName":"褲子", "isPack":false, "number":0],
-                                ["itemName":"襪子", "isPack":false, "number":0]]],
+                     "items" : [["itemName":"上衣", "isPack":false, "number":1],
+                                ["itemName":"外套", "isPack":false, "number":1],
+                                ["itemName":"褲子", "isPack":false, "number":1],
+                                ["itemName":"襪子", "isPack":false, "number":1]]],
                     ["cateName" : "盆洗用具",
-                     "items" : [["itemName":"牙膏", "isPack":false, "number":0],
-                                ["itemName":"牙刷", "isPack":false, "number":0],
-                                ["itemName":"刮鬍刀", "isPack":false, "number":0]]]
+                     "items" : [["itemName":"牙膏", "isPack":false, "number":1],
+                                ["itemName":"牙刷", "isPack":false, "number":1],
+                                ["itemName":"刮鬍刀", "isPack":false, "number":1]]]
                 ]
             )
     ]
@@ -67,7 +67,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 if let okToDo = toDo {
                     
                     // 把待辦事項存到okToDo 加到toDoArray & reload
-                    let newJourney = Journey(name: "", categories: [])
+                    let newJourney = Journey(name: "", categories: [["cateName": "","items":
+                        [["itemName": "修改名稱", "isPack":false, "number":1]]]])
                     newJourney.name = okToDo
                     self.journey.append(newJourney)
                     self.journeyTableView.reloadData()
@@ -132,22 +133,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let numberOfCate = currentJourney.categories.count
         var numberOfEachItems = 0
         var numberOfItems = 0
-        var numberOfPacked = 0
+//        var numberOfPacked = 0
         var totalOfPacked = 0
         for i in 0..<numberOfCate {
             let items = currentJourney.categories[i]["items"] as! [[String:Any]]
             numberOfEachItems = items.count
-            numberOfItems += items.count
+//            numberOfItems += items.count
             for j in 0..<numberOfEachItems {
+                    let count = (items[j]["number"]) as! Int
                 if items[j]["isPack"] as! Bool == true {
-                    let packed = (items[j]["number"]) as! Int
-                    numberOfPacked += 1
-                    totalOfPacked += packed
+//                    let packed = (items[j]["number"]) as! Int
+//                    numberOfPacked += 1
+                    totalOfPacked += count
                 }
+                numberOfItems += count
             }
         }
         
-        let ratio  = Int((Double(totalOfPacked) / Double((numberOfItems+(totalOfPacked-numberOfPacked)))) * 100)
+        let ratio  = Int((Double(totalOfPacked) / Double((numberOfItems))) * 100)
         
         cell.journeyLabel.text = journeyName
         cell.ratioLabel?.text = String(ratio) + "%"

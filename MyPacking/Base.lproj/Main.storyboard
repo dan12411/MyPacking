@@ -42,7 +42,7 @@
                                         <rect key="frame" x="0.0" y="28" width="343" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZUY-re-n2W" id="BRN-55-20S">
-                                            <rect key="frame" x="0.0" y="0.0" width="296" height="54"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="296" height="54.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oec-XN-v64">
@@ -149,17 +149,16 @@
                                                         <constraint firstAttribute="height" constant="30" id="dQ6-hf-d3D"/>
                                                         <constraint firstAttribute="width" constant="30" id="kkT-dk-bmk"/>
                                                     </constraints>
-                                                    <state key="normal" title="Button" image="UnCheck"/>
-                                                    <state key="selected" image="1E66EA08-D816-40E4-914D-BAB528D95B2A"/>
+                                                    <state key="selected" image="2ED95BBB-A3B0-470D-8E87-404D851972C9"/>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L1Y-xz-wwb">
-                                                    <rect key="frame" x="38" y="0.0" width="218.5" height="30"/>
+                                                    <rect key="frame" x="38" y="0.0" width="193.5" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="crd-0t-8mf">
-                                                    <rect key="frame" x="264.5" y="0.0" width="31.5" height="30"/>
+                                                    <rect key="frame" x="239.5" y="0.0" width="56.5" height="30"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -170,7 +169,7 @@
                                     <constraints>
                                         <constraint firstItem="K2L-NV-LwJ" firstAttribute="centerY" secondItem="g13-4e-aCh" secondAttribute="centerY" id="HnT-Fc-lcs"/>
                                         <constraint firstAttribute="trailing" secondItem="K2L-NV-LwJ" secondAttribute="trailing" constant="16" id="bRN-iN-d4d"/>
-                                        <constraint firstItem="L1Y-xz-wwb" firstAttribute="width" secondItem="g13-4e-aCh" secondAttribute="width" multiplier="1:1.5" id="dbh-QG-GJI"/>
+                                        <constraint firstItem="L1Y-xz-wwb" firstAttribute="width" secondItem="g13-4e-aCh" secondAttribute="width" multiplier="1:1.7" id="dbh-QG-GJI"/>
                                         <constraint firstItem="L1Y-xz-wwb" firstAttribute="centerY" secondItem="g13-4e-aCh" secondAttribute="centerY" id="no3-00-1pv"/>
                                         <constraint firstItem="K2L-NV-LwJ" firstAttribute="leading" secondItem="g13-4e-aCh" secondAttribute="leading" constant="16" id="sjK-GF-vpl"/>
                                         <constraint firstItem="g22-YC-FxB" firstAttribute="centerY" secondItem="g13-4e-aCh" secondAttribute="centerY" id="w3u-61-aCh"/>
@@ -250,7 +249,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="4lK-um-RsN" customClass="ItemCollectionViewCell" customModule="MyPacking" customModuleProvider="target">
-                                <rect key="frame" x="38" y="0.0" width="300" height="300"/>
+                                <rect key="frame" x="37.5" y="0.0" width="300" height="300"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
@@ -307,7 +306,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="1E66EA08-D816-40E4-914D-BAB528D95B2A" width="512" height="512">
+        <image name="2ED95BBB-A3B0-470D-8E87-404D851972C9" width="512" height="512">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -17841,7 +17840,6 @@ cgAQCncAAAAAAAAEAQAAAAAAAAA+AAAAAAAAAAAAAAAAABAKeQ
         <image name="Circle" width="48" height="48"/>
         <image name="Play" width="48" height="48"/>
         <image name="Share" width="48" height="48"/>
-        <image name="UnCheck" width="469" height="470"/>
         <image name="addBag" width="256" height="256"/>
         <image name="addBag Pressed" width="256" height="256"/>
     </resources>

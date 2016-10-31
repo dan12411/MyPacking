@@ -36,7 +36,7 @@ class DetailTableViewController: UITableViewController {
                     
                     // creat & reload
                     self.journey?.categories.append(["cateName": okToDo,"items":
-                        [["itemName": "修改名稱", "isPack":false]]])
+                        [["itemName": "修改名稱", "isPack":false, "number":1]]])
                     self.tableView.reloadData()
                     // save data
                     self.saveData()
@@ -91,9 +91,18 @@ class DetailTableViewController: UITableViewController {
             let eachCate = (self.journey?.categories[indexPath.section])! as [String:Any]
             let item = (eachCate["items"] as! Array<Any>)[indexPath.row] as! [String:Any]
             let itemName = item["itemName"] as! String
+            if let count = item["number"] {
+                cell.itemCount.text = String(describing: count)
+            }
             cell.itemLabel.text = itemName
             // 點選後持續反灰
-            (item["isPack"]) as! Bool ? cell.imageButton.setImage(UIImage(named: "Check"), for: .normal) : cell.imageButton.setImage(UIImage(named: "UnCheck"), for: .normal)
+            if (item["isPack"]) as! Bool == true {
+                cell.imageButton.isHidden = false
+                cell.imageButton.setImage(UIImage(named: "Done"), for: .normal)
+                cell.itemCount.textColor = .white
+            } else {
+                cell.imageButton.isHidden = true
+            }
             cell.itemLabel.textColor = (item["isPack"]) as! Bool ? UIColor.lightGray : UIColor.black
             
             return cell
@@ -179,28 +188,36 @@ class DetailTableViewController: UITableViewController {
             let cell = tableView.cellForRow(at: indexPath) as! ItemTableViewCell
             
             if isPack {
-                let checkImage = UIImage(named: "UnCheck")
-                cell.imageButton.setImage(checkImage, for: .normal)
                 cell.itemLabel.textColor = UIColor.black
+                cell.itemCount.textColor = UIColor.black
+                cell.imageButton.isHidden = true
                 var newCate = (eachCate?["items"] as! [[String:Any]])
                 isPack = false
                 eachItem?["isPack"] = isPack
-                number = 0
+                if let count = cell.itemCount.text {
+                    number = Int(count)!
+                }
                 eachItem?["number"] = number
                 newCate[indexPath.row] = eachItem!
+                print("=============\(eachItem)===============")
                 self.journey?.categories[indexPath.section]["items"] = newCate
                 // save data
                 self.saveData()
             } else {
-                let checkImage = UIImage(named: "Check")
+                cell.imageButton.isHidden = false
+                let checkImage = UIImage(named: "Done")
                 cell.imageButton.setImage(checkImage, for: .normal)
                 cell.itemLabel.textColor = UIColor.lightGray
+                cell.itemCount.textColor = UIColor.white
                 var newCate = (eachCate?["items"] as! [[String:Any]])
                 isPack = true
                 eachItem?["isPack"] = isPack
-                number = Int(cell.itemCount.text!)!
+                if let count = cell.itemCount.text {
+                    number = Int(count)!
+                }
                 eachItem?["number"] = number
                 newCate[indexPath.row] = eachItem!
+                print("=============\(eachItem)===============")
                 self.journey?.categories[indexPath.section]["items"] = newCate
                 // save data
                 self.saveData()
@@ -216,8 +233,9 @@ class DetailTableViewController: UITableViewController {
                         
                         // Create & reload
                         var items = self.journey?.categories[indexPath.section]["items"] as! Array<Any>
-                        items.append(["itemName": okToDo, "isPack":false])
+                        items.append(["itemName": okToDo, "isPack":false, "number":1])
                         self.journey?.categories[indexPath.section]["items"] = items
+                        self.journey?.categories[indexPath.section]["number"] = 0
                         self.tableView.reloadData()
                         // save data
                         self.saveData()
@@ -226,7 +244,6 @@ class DetailTableViewController: UITableViewController {
             }
         }
     }
-    
     
     // 設定哪些item可移動
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
