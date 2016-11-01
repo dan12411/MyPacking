@@ -79,9 +79,11 @@ class DetailTableViewController: UITableViewController {
         self.navigationItem.rightBarButtonItem = self.editButtonItem
         // Remove the separators of the empty rows
         tableView.tableFooterView = UIView(frame: CGRect.zero)
-        //        // Cell 自動調整列高(未成功)
-        //        tableView.estimatedRowHeight = 56.0
-        //        tableView.rowHeight = UITableViewAutomaticDimension
+        // Remove the title of the back button
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+//        // Cell 自動調整列高(未成功)
+//        tableView.estimatedRowHeight = 56.0
+//        tableView.rowHeight = UITableViewAutomaticDimension
     }
     
     
@@ -124,7 +126,7 @@ class DetailTableViewController: UITableViewController {
             if (item["isPack"]) as! Bool == true {
                 cell.imageButton.isHidden = false
                 cell.imageButton.setImage(UIImage(named: "Done"), for: .normal)
-                cell.itemCount.textColor = .white
+                cell.itemCount.textColor = UIColor(red: 214.0/255.0, green: 244.0/255.0, blue: 243.0/255.0, alpha: 1.0)
             } else {
                 cell.imageButton.isHidden = true
             }
@@ -142,6 +144,7 @@ class DetailTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return journey?.categories[section]["cateName"] as? String
     }
+    
     // Section Color (字體顏色未變)
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header :UITableViewHeaderFooterView = UITableViewHeaderFooterView()
@@ -208,6 +211,7 @@ class DetailTableViewController: UITableViewController {
             
             var eachCate = journey?.categories[indexPath.section]
             var eachItem = ((eachCate?["items"]) as? [[String:Any]])?[indexPath.row]
+            var newCate = (eachCate?["items"] as! [[String:Any]])
             var isPack = eachItem?["isPack"] as! Bool
             var number = eachItem?["number"] as! Int
             let cell = tableView.cellForRow(at: indexPath) as! ItemTableViewCell
@@ -216,7 +220,7 @@ class DetailTableViewController: UITableViewController {
                 cell.itemLabel.textColor = UIColor.black
                 cell.itemCount.textColor = UIColor.black
                 cell.imageButton.isHidden = true
-                var newCate = (eachCate?["items"] as! [[String:Any]])
+
                 isPack = false
                 eachItem?["isPack"] = isPack
                 if let count = cell.itemCount.text {
@@ -233,8 +237,8 @@ class DetailTableViewController: UITableViewController {
                 let checkImage = UIImage(named: "Done")
                 cell.imageButton.setImage(checkImage, for: .normal)
                 cell.itemLabel.textColor = UIColor.lightGray
-                cell.itemCount.textColor = UIColor.white
-                var newCate = (eachCate?["items"] as! [[String:Any]])
+                cell.itemCount.textColor = UIColor(red: 214.0/255.0, green: 244.0/255.0, blue: 243.0/255.0, alpha: 1.0)
+
                 isPack = true
                 eachItem?["isPack"] = isPack
                 if let count = cell.itemCount.text {
@@ -272,8 +276,12 @@ class DetailTableViewController: UITableViewController {
     
     // 設定哪些item可移動
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        
-        return true
+        let items = self.journey?.categories[indexPath.section]["items"] as! Array<Any>
+        if indexPath.row < (items.count) {
+            return true
+        } else {
+            return false
+        }
     }
     
     // 按下 i 之後要修改 toDo
@@ -355,6 +363,7 @@ class DetailTableViewController: UITableViewController {
         if segue.identifier == "showPlay" {
             if let dvc = segue.destination as? DetailCollectionViewController {
                 dvc.journey = self.journey
+                dvc.index = self.index
             }
         }
     }
