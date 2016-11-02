@@ -17,3 +17,4 @@ class ItemCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var myImage: UIImageView!
     
 }
+

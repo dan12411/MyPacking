@@ -43,6 +43,11 @@ class DetailCollectionViewController: UICollectionViewController, UICollectionVi
         self.title = journey?.name
         // hiden back button
         self.navigationItem.hidesBackButton = true
+        // background image
+        let image = UIImageView();
+        image.image = UIImage(named: "movie");
+        image.contentMode = .scaleAspectFill
+        self.collectionView?.backgroundView = image
     }
 
     override func didReceiveMemoryWarning() {

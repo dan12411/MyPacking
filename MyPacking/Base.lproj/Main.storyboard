@@ -149,16 +149,16 @@
                                                         <constraint firstAttribute="height" constant="30" id="dQ6-hf-d3D"/>
                                                         <constraint firstAttribute="width" constant="30" id="kkT-dk-bmk"/>
                                                     </constraints>
-                                                    <state key="selected" image="FE623A0B-DE9D-4557-9A96-904FCF9FF2A1"/>
+                                                    <state key="selected" image="E9B9D052-DF10-4127-B817-3BC55D44D4D3"/>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L1Y-xz-wwb">
-                                                    <rect key="frame" x="38" y="0.0" width="193.5" height="30"/>
+                                                    <rect key="frame" x="38" y="0.0" width="193" height="30"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="crd-0t-8mf">
-                                                    <rect key="frame" x="239.5" y="0.0" width="56.5" height="30"/>
+                                                    <rect key="frame" x="239" y="0.0" width="57" height="30"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -293,7 +293,7 @@
                                         </stackView>
                                     </subviews>
                                 </view>
-                                <color key="backgroundColor" red="0.50199985504150391" green="0.82489216327667236" blue="0.80588549375534058" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.50199985504150391" green="0.82489216327667236" blue="0.80588549375534058" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="n0A-sO-vDJ" firstAttribute="leading" secondItem="4lK-um-RsN" secondAttribute="leading" id="AAL-8l-J4G"/>
                                     <constraint firstItem="n0A-sO-vDJ" firstAttribute="top" secondItem="4lK-um-RsN" secondAttribute="top" id="SOv-Ul-PWC"/>
@@ -359,8 +359,7 @@
     </scenes>
     <resources>
         <image name="AddCate" width="48" height="48"/>
-        <image name="Exit" width="36" height="36"/>
-        <image name="FE623A0B-DE9D-4557-9A96-904FCF9FF2A1" width="512" height="512">
+        <image name="E9B9D052-DF10-4127-B817-3BC55D44D4D3" width="512" height="512">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -17890,6 +17889,7 @@ FAAQChgAEAofABAKJwAQCjQAEAo5ABAKOwAQCj0AEApCABAKSgAQCk0AEApSABAKWgAQCl0AEApvABAK
 cgAQCncAAAAAAAAEAQAAAAAAAAA+AAAAAAAAAAAAAAAAABAKeQ
 </mutableData>
         </image>
+        <image name="Exit" width="36" height="36"/>
         <image name="Play" width="48" height="48"/>
         <image name="Share" width="48" height="48"/>
         <image name="addBag" width="256" height="256"/>

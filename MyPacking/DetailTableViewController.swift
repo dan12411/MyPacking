@@ -129,6 +129,7 @@ class DetailTableViewController: UITableViewController {
                 cell.itemCount.textColor = UIColor(red: 214.0/255.0, green: 244.0/255.0, blue: 243.0/255.0, alpha: 1.0)
             } else {
                 cell.imageButton.isHidden = true
+                cell.itemCount.textColor = .black
             }
             cell.itemLabel.textColor = (item["isPack"]) as! Bool ? UIColor.lightGray : UIColor.black
             
