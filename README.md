@@ -2,7 +2,7 @@
 
 ![]()
 
-TeamUp 是一款目標管理的APP，藉由明確的目標計劃，與朋友之間的羈絆，讓使用者更容易去達成目標。
+MyPacking 是一款旅遊打包的APP，具備基本的CRUD功能， 可以將檔案存檔至單機(UserDefault)
 
 [![Travis branch](https://img.shields.io/travis/rust-lang/rust/master.svg)]()
 
